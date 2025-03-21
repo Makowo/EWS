@@ -26,6 +26,17 @@ Mod for Diesel Engine games to reimplement the "Bringer of Worlds" level editor 
 ### Lua mod
  - Modifications to game Lua to allow the game's level editor (Bringer of Worlds) to work properly.
 
+## TODO / Next Steps
+ - Implement the rest of the UI elements
+
+### Support for other games?
+
+Support for RAID: World War II must be finished before starting work on making the mod work with other games using Diesel.
+This process will take a lot of time as there are a lot of things that still need to be finished and polished, some of these things include:
+ - Writing a new asset bundling system for mod assets to load properly.
+ - Rewriting a section of RAID's asset loading system to allow for unplanned access to files in packages (accessing files in packages without having to load the package they belong to).
+**This will be necessary as the only way to get the mod working properly at the moment is to extract and repackage the entire game to have all non-streamed assets in one single package.**
+
 ## Editor Icons
 The default editor icons (found in the `assets` folder of this repository) are from the game files of [Lead and Gold: Gangs of the Wild West](https://store.steampowered.com/app/42120/Lead_and_Gold_Gangs_of_the_Wild_West/).
 
