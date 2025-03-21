@@ -1,0 +1,23 @@
+<editor_types>
+  <statics>
+    <type value="generic"/>
+    <type value="effects"/>
+    <type value="static_tech"/>
+    <type value="leveltools"/>
+    <type value="multiplayer"/>
+    <type value="backdrop"/>
+    <type value="vegetation"/>
+    <!--type value="brush"/-->
+    <type value="sandbox"/>
+    <type value="architecture"/>
+    <type value="props"/>
+    <type value="outdoors"/>
+    <type value="backdrop"/>
+    <type value="mockup_units"/>
+  </statics>
+  <dynamics>
+    <type value="pickup"/>
+    <type value="multiplayer_pickup"/>
+    <type value="dynamic_debris"/>
+  </dynamics>
+</editor_types>

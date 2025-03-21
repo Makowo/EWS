@@ -1,0 +1,1276 @@
+#pragma region wx/calctrl.h
+if (!strcmp(style_cstr, "EVT_CALENDAR_SEL_CHANGED")) {
+  return wxEVT_CALENDAR_SEL_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_CALENDAR_PAGE_CHANGED")) {
+  return wxEVT_CALENDAR_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_CALENDAR_DOUBLECLICKED")) {
+  return wxEVT_CALENDAR_DOUBLECLICKED;
+}
+if (!strcmp(style_cstr, "EVT_CALENDAR_WEEKDAY_CLICKED")) {
+  return wxEVT_CALENDAR_WEEKDAY_CLICKED;
+}
+if (!strcmp(style_cstr, "EVT_CALENDAR_WEEK_CLICKED")) {
+  return wxEVT_CALENDAR_WEEK_CLICKED;
+}
+#pragma endregion
+#pragma region wx/choicebk.h
+if (!strcmp(style_cstr, "EVT_CHOICEBOOK_PAGE_CHANGED")) {
+  return wxEVT_CHOICEBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_CHOICEBOOK_PAGE_CHANGING")) {
+  return wxEVT_CHOICEBOOK_PAGE_CHANGING;
+}
+#pragma endregion
+#pragma region wx/clrpicker.h
+if (!strcmp(style_cstr, "EVT_COLOURPICKER_CHANGED")) {
+  return wxEVT_COLOURPICKER_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_COLOURPICKER_CURRENT_CHANGED")) {
+  return wxEVT_COLOURPICKER_CURRENT_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_COLOURPICKER_DIALOG_CANCELLED")) {
+  return wxEVT_COLOURPICKER_DIALOG_CANCELLED;
+}
+#pragma endregion
+#pragma region wx/collpane.h
+if (!strcmp(style_cstr, "EVT_COLLAPSIBLEPANE_CHANGED")) {
+  return wxEVT_COLLAPSIBLEPANE_CHANGED;
+}
+#pragma endregion
+#pragma region wx/colordlg.h
+if (!strcmp(style_cstr, "EVT_COLOUR_CHANGED")) {
+  return wxEVT_COLOUR_CHANGED;
+}
+#pragma endregion
+#pragma region wx/dataview.h
+if (!strcmp(style_cstr, "EVT_DATAVIEW_SELECTION_CHANGED")) {
+  return wxEVT_DATAVIEW_SELECTION_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_ACTIVATED")) {
+  return wxEVT_DATAVIEW_ITEM_ACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_COLLAPSING")) {
+  return wxEVT_DATAVIEW_ITEM_COLLAPSING;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_COLLAPSED")) {
+  return wxEVT_DATAVIEW_ITEM_COLLAPSED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_EXPANDING")) {
+  return wxEVT_DATAVIEW_ITEM_EXPANDING;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_EXPANDED")) {
+  return wxEVT_DATAVIEW_ITEM_EXPANDED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_START_EDITING")) {
+  return wxEVT_DATAVIEW_ITEM_START_EDITING;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_EDITING_STARTED")) {
+  return wxEVT_DATAVIEW_ITEM_EDITING_STARTED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_EDITING_DONE")) {
+  return wxEVT_DATAVIEW_ITEM_EDITING_DONE;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_VALUE_CHANGED")) {
+  return wxEVT_DATAVIEW_ITEM_VALUE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_CONTEXT_MENU")) {
+  return wxEVT_DATAVIEW_ITEM_CONTEXT_MENU;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_COLUMN_HEADER_CLICK")) {
+  return wxEVT_DATAVIEW_COLUMN_HEADER_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_COLUMN_HEADER_RIGHT_CLICK")) {
+  return wxEVT_DATAVIEW_COLUMN_HEADER_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_COLUMN_SORTED")) {
+  return wxEVT_DATAVIEW_COLUMN_SORTED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_COLUMN_REORDERED")) {
+  return wxEVT_DATAVIEW_COLUMN_REORDERED;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_CACHE_HINT")) {
+  return wxEVT_DATAVIEW_CACHE_HINT;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_BEGIN_DRAG")) {
+  return wxEVT_DATAVIEW_ITEM_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_DROP_POSSIBLE")) {
+  return wxEVT_DATAVIEW_ITEM_DROP_POSSIBLE;
+}
+if (!strcmp(style_cstr, "EVT_DATAVIEW_ITEM_DROP")) {
+  return wxEVT_DATAVIEW_ITEM_DROP;
+}
+#pragma endregion
+#pragma region wx/dateevt.h
+if (!strcmp(style_cstr, "EVT_DATE_CHANGED")) {
+  return wxEVT_DATE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_TIME_CHANGED")) {
+  return wxEVT_TIME_CHANGED;
+}
+#pragma endregion
+#pragma region wx/dirctrl.h
+if (!strcmp(style_cstr, "EVT_DIRCTRL_SELECTIONCHANGED")) {
+  return wxEVT_DIRCTRL_SELECTIONCHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DIRCTRL_FILEACTIVATED")) {
+  return wxEVT_DIRCTRL_FILEACTIVATED;
+}
+#pragma endregion
+#pragma region wx/event.h
+if (!strcmp(style_cstr, "EVT_NULL")) {
+  return wxEVT_NULL;
+}
+if (!strcmp(style_cstr, "EVT_ANY")) {
+  return wxEVT_ANY;
+}
+if (!strcmp(style_cstr, "EVT_BUTTON")) {
+  return wxEVT_BUTTON;
+}
+if (!strcmp(style_cstr, "EVT_CHECKBOX")) {
+  return wxEVT_CHECKBOX;
+}
+if (!strcmp(style_cstr, "EVT_CHOICE")) {
+  return wxEVT_CHOICE;
+}
+if (!strcmp(style_cstr, "EVT_LISTBOX")) {
+  return wxEVT_LISTBOX;
+}
+if (!strcmp(style_cstr, "EVT_LISTBOX_DCLICK")) {
+  return wxEVT_LISTBOX_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_CHECKLISTBOX")) {
+  return wxEVT_CHECKLISTBOX;
+}
+if (!strcmp(style_cstr, "EVT_MENU")) {
+  return wxEVT_MENU;
+}
+if (!strcmp(style_cstr, "EVT_SLIDER")) {
+  return wxEVT_SLIDER;
+}
+if (!strcmp(style_cstr, "EVT_RADIOBOX")) {
+  return wxEVT_RADIOBOX;
+}
+if (!strcmp(style_cstr, "EVT_RADIOBUTTON")) {
+  return wxEVT_RADIOBUTTON;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLBAR")) {
+  return wxEVT_SCROLLBAR;
+}
+if (!strcmp(style_cstr, "EVT_VLBOX")) {
+  return wxEVT_VLBOX;
+}
+if (!strcmp(style_cstr, "EVT_COMBOBOX")) {
+  return wxEVT_COMBOBOX;
+}
+if (!strcmp(style_cstr, "EVT_TOOL_RCLICKED")) {
+  return wxEVT_TOOL_RCLICKED;
+}
+if (!strcmp(style_cstr, "EVT_TOOL_DROPDOWN")) {
+  return wxEVT_TOOL_DROPDOWN;
+}
+if (!strcmp(style_cstr, "EVT_TOOL_ENTER")) {
+  return wxEVT_TOOL_ENTER;
+}
+if (!strcmp(style_cstr, "EVT_COMBOBOX_DROPDOWN")) {
+  return wxEVT_COMBOBOX_DROPDOWN;
+}
+if (!strcmp(style_cstr, "EVT_COMBOBOX_CLOSEUP")) {
+  return wxEVT_COMBOBOX_CLOSEUP;
+}
+if (!strcmp(style_cstr, "EVT_THREAD")) {
+  return wxEVT_THREAD;
+}
+if (!strcmp(style_cstr, "EVT_LEFT_DOWN")) {
+  return wxEVT_LEFT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_LEFT_UP")) {
+  return wxEVT_LEFT_UP;
+}
+if (!strcmp(style_cstr, "EVT_MIDDLE_DOWN")) {
+  return wxEVT_MIDDLE_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_MIDDLE_UP")) {
+  return wxEVT_MIDDLE_UP;
+}
+if (!strcmp(style_cstr, "EVT_RIGHT_DOWN")) {
+  return wxEVT_RIGHT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_RIGHT_UP")) {
+  return wxEVT_RIGHT_UP;
+}
+if (!strcmp(style_cstr, "EVT_MOTION")) {
+  return wxEVT_MOTION;
+}
+if (!strcmp(style_cstr, "EVT_ENTER_WINDOW")) {
+  return wxEVT_ENTER_WINDOW;
+}
+if (!strcmp(style_cstr, "EVT_LEAVE_WINDOW")) {
+  return wxEVT_LEAVE_WINDOW;
+}
+if (!strcmp(style_cstr, "EVT_LEFT_DCLICK")) {
+  return wxEVT_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_MIDDLE_DCLICK")) {
+  return wxEVT_MIDDLE_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_RIGHT_DCLICK")) {
+  return wxEVT_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_SET_FOCUS")) {
+  return wxEVT_SET_FOCUS;
+}
+if (!strcmp(style_cstr, "EVT_KILL_FOCUS")) {
+  return wxEVT_KILL_FOCUS;
+}
+if (!strcmp(style_cstr, "EVT_CHILD_FOCUS")) {
+  return wxEVT_CHILD_FOCUS;
+}
+if (!strcmp(style_cstr, "EVT_MOUSEWHEEL")) {
+  return wxEVT_MOUSEWHEEL;
+}
+if (!strcmp(style_cstr, "EVT_MAGNIFY")) {
+  return wxEVT_MAGNIFY;
+}
+if (!strcmp(style_cstr, "EVT_AUX1_DOWN")) {
+  return wxEVT_AUX1_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_AUX1_UP")) {
+  return wxEVT_AUX1_UP;
+}
+if (!strcmp(style_cstr, "EVT_AUX1_DCLICK")) {
+  return wxEVT_AUX1_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_AUX2_DOWN")) {
+  return wxEVT_AUX2_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_AUX2_UP")) {
+  return wxEVT_AUX2_UP;
+}
+if (!strcmp(style_cstr, "EVT_AUX2_DCLICK")) {
+  return wxEVT_AUX2_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_CHAR")) {
+  return wxEVT_CHAR;
+}
+if (!strcmp(style_cstr, "EVT_CHAR_HOOK")) {
+  return wxEVT_CHAR_HOOK;
+}
+if (!strcmp(style_cstr, "EVT_NAVIGATION_KEY")) {
+  return wxEVT_NAVIGATION_KEY;
+}
+if (!strcmp(style_cstr, "EVT_KEY_DOWN")) {
+  return wxEVT_KEY_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_KEY_UP")) {
+  return wxEVT_KEY_UP;
+}
+if (!strcmp(style_cstr, "EVT_HOTKEY")) {
+  return wxEVT_HOTKEY;
+}
+if (!strcmp(style_cstr, "EVT_SET_CURSOR")) {
+  return wxEVT_SET_CURSOR;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_TOP")) {
+  return wxEVT_SCROLL_TOP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_BOTTOM")) {
+  return wxEVT_SCROLL_BOTTOM;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_LINEUP")) {
+  return wxEVT_SCROLL_LINEUP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_LINEDOWN")) {
+  return wxEVT_SCROLL_LINEDOWN;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_PAGEUP")) {
+  return wxEVT_SCROLL_PAGEUP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_PAGEDOWN")) {
+  return wxEVT_SCROLL_PAGEDOWN;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_THUMBTRACK")) {
+  return wxEVT_SCROLL_THUMBTRACK;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_THUMBRELEASE")) {
+  return wxEVT_SCROLL_THUMBRELEASE;
+}
+if (!strcmp(style_cstr, "EVT_SCROLL_CHANGED")) {
+  return wxEVT_SCROLL_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_SPIN_UP")) {
+  return wxEVT_SPIN_UP;
+}
+if (!strcmp(style_cstr, "EVT_SPIN_DOWN")) {
+  return wxEVT_SPIN_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_SPIN")) {
+  return wxEVT_SPIN;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_TOP")) {
+  return wxEVT_SCROLLWIN_TOP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_BOTTOM")) {
+  return wxEVT_SCROLLWIN_BOTTOM;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_LINEUP")) {
+  return wxEVT_SCROLLWIN_LINEUP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_LINEDOWN")) {
+  return wxEVT_SCROLLWIN_LINEDOWN;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_PAGEUP")) {
+  return wxEVT_SCROLLWIN_PAGEUP;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_PAGEDOWN")) {
+  return wxEVT_SCROLLWIN_PAGEDOWN;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_THUMBTRACK")) {
+  return wxEVT_SCROLLWIN_THUMBTRACK;
+}
+if (!strcmp(style_cstr, "EVT_SCROLLWIN_THUMBRELEASE")) {
+  return wxEVT_SCROLLWIN_THUMBRELEASE;
+}
+if (!strcmp(style_cstr, "EVT_GESTURE_PAN")) {
+  return wxEVT_GESTURE_PAN;
+}
+if (!strcmp(style_cstr, "EVT_GESTURE_ZOOM")) {
+  return wxEVT_GESTURE_ZOOM;
+}
+if (!strcmp(style_cstr, "EVT_GESTURE_ROTATE")) {
+  return wxEVT_GESTURE_ROTATE;
+}
+if (!strcmp(style_cstr, "EVT_TWO_FINGER_TAP")) {
+  return wxEVT_TWO_FINGER_TAP;
+}
+if (!strcmp(style_cstr, "EVT_LONG_PRESS")) {
+  return wxEVT_LONG_PRESS;
+}
+if (!strcmp(style_cstr, "EVT_PRESS_AND_TAP")) {
+  return wxEVT_PRESS_AND_TAP;
+}
+if (!strcmp(style_cstr, "EVT_SIZE")) {
+  return wxEVT_SIZE;
+}
+if (!strcmp(style_cstr, "EVT_MOVE")) {
+  return wxEVT_MOVE;
+}
+if (!strcmp(style_cstr, "EVT_CLOSE_WINDOW")) {
+  return wxEVT_CLOSE_WINDOW;
+}
+if (!strcmp(style_cstr, "EVT_END_SESSION")) {
+  return wxEVT_END_SESSION;
+}
+if (!strcmp(style_cstr, "EVT_QUERY_END_SESSION")) {
+  return wxEVT_QUERY_END_SESSION;
+}
+if (!strcmp(style_cstr, "EVT_ACTIVATE_APP")) {
+  return wxEVT_ACTIVATE_APP;
+}
+if (!strcmp(style_cstr, "EVT_ACTIVATE")) {
+  return wxEVT_ACTIVATE;
+}
+if (!strcmp(style_cstr, "EVT_CREATE")) {
+  return wxEVT_CREATE;
+}
+if (!strcmp(style_cstr, "EVT_DESTROY")) {
+  return wxEVT_DESTROY;
+}
+if (!strcmp(style_cstr, "EVT_SHOW")) {
+  return wxEVT_SHOW;
+}
+if (!strcmp(style_cstr, "EVT_ICONIZE")) {
+  return wxEVT_ICONIZE;
+}
+if (!strcmp(style_cstr, "EVT_MAXIMIZE")) {
+  return wxEVT_MAXIMIZE;
+}
+if (!strcmp(style_cstr, "EVT_FULLSCREEN")) {
+  return wxEVT_FULLSCREEN;
+}
+if (!strcmp(style_cstr, "EVT_MOUSE_CAPTURE_CHANGED")) {
+  return wxEVT_MOUSE_CAPTURE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_MOUSE_CAPTURE_LOST")) {
+  return wxEVT_MOUSE_CAPTURE_LOST;
+}
+if (!strcmp(style_cstr, "EVT_PAINT")) {
+  return wxEVT_PAINT;
+}
+if (!strcmp(style_cstr, "EVT_ERASE_BACKGROUND")) {
+  return wxEVT_ERASE_BACKGROUND;
+}
+if (!strcmp(style_cstr, "EVT_NC_PAINT")) {
+  return wxEVT_NC_PAINT;
+}
+if (!strcmp(style_cstr, "EVT_MENU_OPEN")) {
+  return wxEVT_MENU_OPEN;
+}
+if (!strcmp(style_cstr, "EVT_MENU_CLOSE")) {
+  return wxEVT_MENU_CLOSE;
+}
+if (!strcmp(style_cstr, "EVT_MENU_HIGHLIGHT")) {
+  return wxEVT_MENU_HIGHLIGHT;
+}
+if (!strcmp(style_cstr, "EVT_CONTEXT_MENU")) {
+  return wxEVT_CONTEXT_MENU;
+}
+if (!strcmp(style_cstr, "EVT_SYS_COLOUR_CHANGED")) {
+  return wxEVT_SYS_COLOUR_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DISPLAY_CHANGED")) {
+  return wxEVT_DISPLAY_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DPI_CHANGED")) {
+  return wxEVT_DPI_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_QUERY_NEW_PALETTE")) {
+  return wxEVT_QUERY_NEW_PALETTE;
+}
+if (!strcmp(style_cstr, "EVT_PALETTE_CHANGED")) {
+  return wxEVT_PALETTE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_JOY_BUTTON_DOWN")) {
+  return wxEVT_JOY_BUTTON_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_JOY_BUTTON_UP")) {
+  return wxEVT_JOY_BUTTON_UP;
+}
+if (!strcmp(style_cstr, "EVT_JOY_MOVE")) {
+  return wxEVT_JOY_MOVE;
+}
+if (!strcmp(style_cstr, "EVT_JOY_ZMOVE")) {
+  return wxEVT_JOY_ZMOVE;
+}
+if (!strcmp(style_cstr, "EVT_DROP_FILES")) {
+  return wxEVT_DROP_FILES;
+}
+if (!strcmp(style_cstr, "EVT_INIT_DIALOG")) {
+  return wxEVT_INIT_DIALOG;
+}
+if (!strcmp(style_cstr, "EVT_IDLE")) {
+  return wxEVT_IDLE;
+}
+if (!strcmp(style_cstr, "EVT_UPDATE_UI")) {
+  return wxEVT_UPDATE_UI;
+}
+if (!strcmp(style_cstr, "EVT_SIZING")) {
+  return wxEVT_SIZING;
+}
+if (!strcmp(style_cstr, "EVT_MOVING")) {
+  return wxEVT_MOVING;
+}
+if (!strcmp(style_cstr, "EVT_MOVE_START")) {
+  return wxEVT_MOVE_START;
+}
+if (!strcmp(style_cstr, "EVT_MOVE_END")) {
+  return wxEVT_MOVE_END;
+}
+if (!strcmp(style_cstr, "EVT_HIBERNATE")) {
+  return wxEVT_HIBERNATE;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_COPY")) {
+  return wxEVT_TEXT_COPY;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_CUT")) {
+  return wxEVT_TEXT_CUT;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_PASTE")) {
+  return wxEVT_TEXT_PASTE;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_LEFT_CLICK")) {
+  return wxEVT_COMMAND_LEFT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_LEFT_DCLICK")) {
+  return wxEVT_COMMAND_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_RIGHT_CLICK")) {
+  return wxEVT_COMMAND_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_RIGHT_DCLICK")) {
+  return wxEVT_COMMAND_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_SET_FOCUS")) {
+  return wxEVT_COMMAND_SET_FOCUS;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_KILL_FOCUS")) {
+  return wxEVT_COMMAND_KILL_FOCUS;
+}
+if (!strcmp(style_cstr, "EVT_COMMAND_ENTER")) {
+  return wxEVT_COMMAND_ENTER;
+}
+if (!strcmp(style_cstr, "EVT_HELP")) {
+  return wxEVT_HELP;
+}
+if (!strcmp(style_cstr, "EVT_DETAILED_HELP")) {
+  return wxEVT_DETAILED_HELP;
+}
+if (!strcmp(style_cstr, "EVT_TOOL")) {
+  return wxEVT_TOOL;
+}
+if (!strcmp(style_cstr, "EVT_WINDOW_MODAL_DIALOG_CLOSED")) {
+  return wxEVT_WINDOW_MODAL_DIALOG_CLOSED;
+}
+#pragma endregion
+#pragma region wx/fdrepdlg.h
+if (!strcmp(style_cstr, "EVT_FIND")) {
+  return wxEVT_FIND;
+}
+if (!strcmp(style_cstr, "EVT_FIND_NEXT")) {
+  return wxEVT_FIND_NEXT;
+}
+if (!strcmp(style_cstr, "EVT_FIND_REPLACE")) {
+  return wxEVT_FIND_REPLACE;
+}
+if (!strcmp(style_cstr, "EVT_FIND_REPLACE_ALL")) {
+  return wxEVT_FIND_REPLACE_ALL;
+}
+if (!strcmp(style_cstr, "EVT_FIND_CLOSE")) {
+  return wxEVT_FIND_CLOSE;
+}
+#pragma endregion
+#pragma region wx/filectrl.h
+if (!strcmp(style_cstr, "EVT_FILECTRL_SELECTIONCHANGED")) {
+  return wxEVT_FILECTRL_SELECTIONCHANGED;
+}
+if (!strcmp(style_cstr, "EVT_FILECTRL_FILEACTIVATED")) {
+  return wxEVT_FILECTRL_FILEACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_FILECTRL_FOLDERCHANGED")) {
+  return wxEVT_FILECTRL_FOLDERCHANGED;
+}
+if (!strcmp(style_cstr, "EVT_FILECTRL_FILTERCHANGED")) {
+  return wxEVT_FILECTRL_FILTERCHANGED;
+}
+#pragma endregion
+#pragma region wx/filepicker.h
+if (!strcmp(style_cstr, "EVT_FILEPICKER_CHANGED")) {
+  return wxEVT_FILEPICKER_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_DIRPICKER_CHANGED")) {
+  return wxEVT_DIRPICKER_CHANGED;
+}
+#pragma endregion
+#pragma region wx/fontpicker.h
+if (!strcmp(style_cstr, "EVT_FONTPICKER_CHANGED")) {
+  return wxEVT_FONTPICKER_CHANGED;
+}
+#pragma endregion
+#pragma region wx/fswatcher.h
+if (!strcmp(style_cstr, "EVT_FSWATCHER")) {
+  return wxEVT_FSWATCHER;
+}
+#pragma endregion
+#pragma region wx/grid.h
+if (!strcmp(style_cstr, "EVT_GRID_CELL_LEFT_CLICK")) {
+  return wxEVT_GRID_CELL_LEFT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_RIGHT_CLICK")) {
+  return wxEVT_GRID_CELL_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_LEFT_DCLICK")) {
+  return wxEVT_GRID_CELL_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_RIGHT_DCLICK")) {
+  return wxEVT_GRID_CELL_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_LABEL_LEFT_CLICK")) {
+  return wxEVT_GRID_LABEL_LEFT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_LABEL_RIGHT_CLICK")) {
+  return wxEVT_GRID_LABEL_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_LABEL_LEFT_DCLICK")) {
+  return wxEVT_GRID_LABEL_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_LABEL_RIGHT_DCLICK")) {
+  return wxEVT_GRID_LABEL_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_GRID_ROW_SIZE")) {
+  return wxEVT_GRID_ROW_SIZE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_ROW_AUTO_SIZE")) {
+  return wxEVT_GRID_ROW_AUTO_SIZE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_COL_SIZE")) {
+  return wxEVT_GRID_COL_SIZE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_COL_AUTO_SIZE")) {
+  return wxEVT_GRID_COL_AUTO_SIZE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_RANGE_SELECTING")) {
+  return wxEVT_GRID_RANGE_SELECTING;
+}
+if (!strcmp(style_cstr, "EVT_GRID_RANGE_SELECTED")) {
+  return wxEVT_GRID_RANGE_SELECTED;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_CHANGING")) {
+  return wxEVT_GRID_CELL_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_CHANGED")) {
+  return wxEVT_GRID_CELL_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_GRID_SELECT_CELL")) {
+  return wxEVT_GRID_SELECT_CELL;
+}
+if (!strcmp(style_cstr, "EVT_GRID_EDITOR_SHOWN")) {
+  return wxEVT_GRID_EDITOR_SHOWN;
+}
+if (!strcmp(style_cstr, "EVT_GRID_EDITOR_HIDDEN")) {
+  return wxEVT_GRID_EDITOR_HIDDEN;
+}
+if (!strcmp(style_cstr, "EVT_GRID_EDITOR_CREATED")) {
+  return wxEVT_GRID_EDITOR_CREATED;
+}
+if (!strcmp(style_cstr, "EVT_GRID_CELL_BEGIN_DRAG")) {
+  return wxEVT_GRID_CELL_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_GRID_ROW_MOVE")) {
+  return wxEVT_GRID_ROW_MOVE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_COL_MOVE")) {
+  return wxEVT_GRID_COL_MOVE;
+}
+if (!strcmp(style_cstr, "EVT_GRID_COL_SORT")) {
+  return wxEVT_GRID_COL_SORT;
+}
+if (!strcmp(style_cstr, "EVT_GRID_TABBING")) {
+  return wxEVT_GRID_TABBING;
+}
+#pragma endregion
+#pragma region wx/headerctrl.h
+if (!strcmp(style_cstr, "EVT_HEADER_CLICK")) {
+  return wxEVT_HEADER_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_RIGHT_CLICK")) {
+  return wxEVT_HEADER_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_MIDDLE_CLICK")) {
+  return wxEVT_HEADER_MIDDLE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_DCLICK")) {
+  return wxEVT_HEADER_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_RIGHT_DCLICK")) {
+  return wxEVT_HEADER_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_MIDDLE_DCLICK")) {
+  return wxEVT_HEADER_MIDDLE_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_SEPARATOR_DCLICK")) {
+  return wxEVT_HEADER_SEPARATOR_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_BEGIN_RESIZE")) {
+  return wxEVT_HEADER_BEGIN_RESIZE;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_RESIZING")) {
+  return wxEVT_HEADER_RESIZING;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_END_RESIZE")) {
+  return wxEVT_HEADER_END_RESIZE;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_BEGIN_REORDER")) {
+  return wxEVT_HEADER_BEGIN_REORDER;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_END_REORDER")) {
+  return wxEVT_HEADER_END_REORDER;
+}
+if (!strcmp(style_cstr, "EVT_HEADER_DRAGGING_CANCELLED")) {
+  return wxEVT_HEADER_DRAGGING_CANCELLED;
+}
+#pragma endregion
+#pragma region wx/hyperlink.h
+if (!strcmp(style_cstr, "EVT_HYPERLINK")) {
+  return wxEVT_HYPERLINK;
+}
+#pragma endregion
+#pragma region wx/laywin.h
+if (!strcmp(style_cstr, "EVT_QUERY_LAYOUT_INFO")) {
+  return wxEVT_QUERY_LAYOUT_INFO;
+}
+if (!strcmp(style_cstr, "EVT_CALCULATE_LAYOUT")) {
+  return wxEVT_CALCULATE_LAYOUT;
+}
+#pragma endregion
+#pragma region wx/listbook.h
+if (!strcmp(style_cstr, "EVT_LISTBOOK_PAGE_CHANGED")) {
+  return wxEVT_LISTBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_LISTBOOK_PAGE_CHANGING")) {
+  return wxEVT_LISTBOOK_PAGE_CHANGING;
+}
+#pragma endregion
+#pragma region wx/listctrl.h
+if (!strcmp(style_cstr, "EVT_LIST_BEGIN_DRAG")) {
+  return wxEVT_LIST_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_LIST_BEGIN_RDRAG")) {
+  return wxEVT_LIST_BEGIN_RDRAG;
+}
+if (!strcmp(style_cstr, "EVT_LIST_BEGIN_LABEL_EDIT")) {
+  return wxEVT_LIST_BEGIN_LABEL_EDIT;
+}
+if (!strcmp(style_cstr, "EVT_LIST_END_LABEL_EDIT")) {
+  return wxEVT_LIST_END_LABEL_EDIT;
+}
+if (!strcmp(style_cstr, "EVT_LIST_DELETE_ITEM")) {
+  return wxEVT_LIST_DELETE_ITEM;
+}
+if (!strcmp(style_cstr, "EVT_LIST_DELETE_ALL_ITEMS")) {
+  return wxEVT_LIST_DELETE_ALL_ITEMS;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_SELECTED")) {
+  return wxEVT_LIST_ITEM_SELECTED;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_DESELECTED")) {
+  return wxEVT_LIST_ITEM_DESELECTED;
+}
+if (!strcmp(style_cstr, "EVT_LIST_KEY_DOWN")) {
+  return wxEVT_LIST_KEY_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_LIST_INSERT_ITEM")) {
+  return wxEVT_LIST_INSERT_ITEM;
+}
+if (!strcmp(style_cstr, "EVT_LIST_COL_CLICK")) {
+  return wxEVT_LIST_COL_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_RIGHT_CLICK")) {
+  return wxEVT_LIST_ITEM_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_MIDDLE_CLICK")) {
+  return wxEVT_LIST_ITEM_MIDDLE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_ACTIVATED")) {
+  return wxEVT_LIST_ITEM_ACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_LIST_CACHE_HINT")) {
+  return wxEVT_LIST_CACHE_HINT;
+}
+if (!strcmp(style_cstr, "EVT_LIST_COL_RIGHT_CLICK")) {
+  return wxEVT_LIST_COL_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_LIST_COL_BEGIN_DRAG")) {
+  return wxEVT_LIST_COL_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_LIST_COL_DRAGGING")) {
+  return wxEVT_LIST_COL_DRAGGING;
+}
+if (!strcmp(style_cstr, "EVT_LIST_COL_END_DRAG")) {
+  return wxEVT_LIST_COL_END_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_FOCUSED")) {
+  return wxEVT_LIST_ITEM_FOCUSED;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_CHECKED")) {
+  return wxEVT_LIST_ITEM_CHECKED;
+}
+if (!strcmp(style_cstr, "EVT_LIST_ITEM_UNCHECKED")) {
+  return wxEVT_LIST_ITEM_UNCHECKED;
+}
+#pragma endregion
+#pragma region wx/mediactrl.h
+if (!strcmp(style_cstr, "EVT_MEDIA_LOADED")) {
+  return wxEVT_MEDIA_LOADED;
+}
+if (!strcmp(style_cstr, "EVT_MEDIA_STOP")) {
+  return wxEVT_MEDIA_STOP;
+}
+if (!strcmp(style_cstr, "EVT_MEDIA_FINISHED")) {
+  return wxEVT_MEDIA_FINISHED;
+}
+if (!strcmp(style_cstr, "EVT_MEDIA_STATECHANGED")) {
+  return wxEVT_MEDIA_STATECHANGED;
+}
+if (!strcmp(style_cstr, "EVT_MEDIA_PLAY")) {
+  return wxEVT_MEDIA_PLAY;
+}
+if (!strcmp(style_cstr, "EVT_MEDIA_PAUSE")) {
+  return wxEVT_MEDIA_PAUSE;
+}
+#pragma endregion
+#pragma region wx/notebook.h
+if (!strcmp(style_cstr, "EVT_NOTEBOOK_PAGE_CHANGED")) {
+  return wxEVT_NOTEBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_NOTEBOOK_PAGE_CHANGING")) {
+  return wxEVT_NOTEBOOK_PAGE_CHANGING;
+}
+#pragma endregion
+#pragma region wx/notifmsg.h
+if (!strcmp(style_cstr, "EVT_NOTIFICATION_MESSAGE_CLICK")) {
+  return wxEVT_NOTIFICATION_MESSAGE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_NOTIFICATION_MESSAGE_DISMISSED")) {
+  return wxEVT_NOTIFICATION_MESSAGE_DISMISSED;
+}
+if (!strcmp(style_cstr, "EVT_NOTIFICATION_MESSAGE_ACTION")) {
+  return wxEVT_NOTIFICATION_MESSAGE_ACTION;
+}
+#pragma endregion
+#pragma region wx/power.h
+if (!strcmp(style_cstr, "EVT_POWER_SUSPENDING")) {
+  return wxEVT_POWER_SUSPENDING;
+}
+if (!strcmp(style_cstr, "EVT_POWER_SUSPENDED")) {
+  return wxEVT_POWER_SUSPENDED;
+}
+if (!strcmp(style_cstr, "EVT_POWER_SUSPEND_CANCEL")) {
+  return wxEVT_POWER_SUSPEND_CANCEL;
+}
+if (!strcmp(style_cstr, "EVT_POWER_RESUME")) {
+  return wxEVT_POWER_RESUME;
+}
+#pragma endregion
+#pragma region wx/process.h
+if (!strcmp(style_cstr, "EVT_END_PROCESS")) {
+  return wxEVT_END_PROCESS;
+}
+#pragma endregion
+#pragma region wx/sashwin.h
+if (!strcmp(style_cstr, "EVT_SASH_DRAGGED")) {
+  return wxEVT_SASH_DRAGGED;
+}
+#pragma endregion
+#pragma region wx/spinctrl.h
+if (!strcmp(style_cstr, "EVT_SPINCTRL")) {
+  return wxEVT_SPINCTRL;
+}
+if (!strcmp(style_cstr, "EVT_SPINCTRLDOUBLE")) {
+  return wxEVT_SPINCTRLDOUBLE;
+}
+#pragma endregion
+#pragma region wx/splitter.h
+if (!strcmp(style_cstr, "EVT_SPLITTER_SASH_POS_CHANGED")) {
+  return wxEVT_SPLITTER_SASH_POS_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_SPLITTER_SASH_POS_CHANGING")) {
+  return wxEVT_SPLITTER_SASH_POS_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_SPLITTER_SASH_POS_RESIZE")) {
+  return wxEVT_SPLITTER_SASH_POS_RESIZE;
+}
+if (!strcmp(style_cstr, "EVT_SPLITTER_DOUBLECLICKED")) {
+  return wxEVT_SPLITTER_DOUBLECLICKED;
+}
+if (!strcmp(style_cstr, "EVT_SPLITTER_UNSPLIT")) {
+  return wxEVT_SPLITTER_UNSPLIT;
+}
+#pragma endregion
+#pragma region wx/taskbar.h
+if (!strcmp(style_cstr, "EVT_TASKBAR_MOVE")) {
+  return wxEVT_TASKBAR_MOVE;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_LEFT_DOWN")) {
+  return wxEVT_TASKBAR_LEFT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_LEFT_UP")) {
+  return wxEVT_TASKBAR_LEFT_UP;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_RIGHT_DOWN")) {
+  return wxEVT_TASKBAR_RIGHT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_RIGHT_UP")) {
+  return wxEVT_TASKBAR_RIGHT_UP;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_LEFT_DCLICK")) {
+  return wxEVT_TASKBAR_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_RIGHT_DCLICK")) {
+  return wxEVT_TASKBAR_RIGHT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_CLICK")) {
+  return wxEVT_TASKBAR_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_BALLOON_TIMEOUT")) {
+  return wxEVT_TASKBAR_BALLOON_TIMEOUT;
+}
+if (!strcmp(style_cstr, "EVT_TASKBAR_BALLOON_CLICK")) {
+  return wxEVT_TASKBAR_BALLOON_CLICK;
+}
+#pragma endregion
+#pragma region wx/textctrl.h
+if (!strcmp(style_cstr, "EVT_TEXT")) {
+  return wxEVT_TEXT;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_ENTER")) {
+  return wxEVT_TEXT_ENTER;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_URL")) {
+  return wxEVT_TEXT_URL;
+}
+if (!strcmp(style_cstr, "EVT_TEXT_MAXLEN")) {
+  return wxEVT_TEXT_MAXLEN;
+}
+#pragma endregion
+#pragma region wx/tglbtn.h
+if (!strcmp(style_cstr, "EVT_TOGGLEBUTTON")) {
+  return wxEVT_TOGGLEBUTTON;
+}
+#pragma endregion
+#pragma region wx/timer.h
+if (!strcmp(style_cstr, "EVT_TIMER")) {
+  return wxEVT_TIMER;
+}
+#pragma endregion
+#pragma region wx/toolbook.h
+if (!strcmp(style_cstr, "EVT_TOOLBOOK_PAGE_CHANGED")) {
+  return wxEVT_TOOLBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_TOOLBOOK_PAGE_CHANGING")) {
+  return wxEVT_TOOLBOOK_PAGE_CHANGING;
+}
+#pragma endregion
+#pragma region wx/treebook.h
+if (!strcmp(style_cstr, "EVT_TREEBOOK_PAGE_CHANGED")) {
+  return wxEVT_TREEBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_TREEBOOK_PAGE_CHANGING")) {
+  return wxEVT_TREEBOOK_PAGE_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_TREEBOOK_NODE_COLLAPSED")) {
+  return wxEVT_TREEBOOK_NODE_COLLAPSED;
+}
+if (!strcmp(style_cstr, "EVT_TREEBOOK_NODE_EXPANDED")) {
+  return wxEVT_TREEBOOK_NODE_EXPANDED;
+}
+#pragma endregion
+#pragma region wx/treectrl.h
+if (!strcmp(style_cstr, "EVT_TREE_BEGIN_DRAG")) {
+  return wxEVT_TREE_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_TREE_BEGIN_RDRAG")) {
+  return wxEVT_TREE_BEGIN_RDRAG;
+}
+if (!strcmp(style_cstr, "EVT_TREE_BEGIN_LABEL_EDIT")) {
+  return wxEVT_TREE_BEGIN_LABEL_EDIT;
+}
+if (!strcmp(style_cstr, "EVT_TREE_END_LABEL_EDIT")) {
+  return wxEVT_TREE_END_LABEL_EDIT;
+}
+if (!strcmp(style_cstr, "EVT_TREE_DELETE_ITEM")) {
+  return wxEVT_TREE_DELETE_ITEM;
+}
+if (!strcmp(style_cstr, "EVT_TREE_GET_INFO")) {
+  return wxEVT_TREE_GET_INFO;
+}
+if (!strcmp(style_cstr, "EVT_TREE_SET_INFO")) {
+  return wxEVT_TREE_SET_INFO;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_EXPANDED")) {
+  return wxEVT_TREE_ITEM_EXPANDED;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_EXPANDING")) {
+  return wxEVT_TREE_ITEM_EXPANDING;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_COLLAPSED")) {
+  return wxEVT_TREE_ITEM_COLLAPSED;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_COLLAPSING")) {
+  return wxEVT_TREE_ITEM_COLLAPSING;
+}
+if (!strcmp(style_cstr, "EVT_TREE_SEL_CHANGED")) {
+  return wxEVT_TREE_SEL_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_TREE_SEL_CHANGING")) {
+  return wxEVT_TREE_SEL_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_TREE_KEY_DOWN")) {
+  return wxEVT_TREE_KEY_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_ACTIVATED")) {
+  return wxEVT_TREE_ITEM_ACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_RIGHT_CLICK")) {
+  return wxEVT_TREE_ITEM_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_MIDDLE_CLICK")) {
+  return wxEVT_TREE_ITEM_MIDDLE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_TREE_END_DRAG")) {
+  return wxEVT_TREE_END_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_TREE_STATE_IMAGE_CLICK")) {
+  return wxEVT_TREE_STATE_IMAGE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_GETTOOLTIP")) {
+  return wxEVT_TREE_ITEM_GETTOOLTIP;
+}
+if (!strcmp(style_cstr, "EVT_TREE_ITEM_MENU")) {
+  return wxEVT_TREE_ITEM_MENU;
+}
+#pragma endregion
+#pragma region wx/treelist.h
+if (!strcmp(style_cstr, "EVT_TREELIST_SELECTION_CHANGED")) {
+  return wxEVT_TREELIST_SELECTION_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_ITEM_EXPANDING")) {
+  return wxEVT_TREELIST_ITEM_EXPANDING;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_ITEM_EXPANDED")) {
+  return wxEVT_TREELIST_ITEM_EXPANDED;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_ITEM_CHECKED")) {
+  return wxEVT_TREELIST_ITEM_CHECKED;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_ITEM_ACTIVATED")) {
+  return wxEVT_TREELIST_ITEM_ACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_ITEM_CONTEXT_MENU")) {
+  return wxEVT_TREELIST_ITEM_CONTEXT_MENU;
+}
+if (!strcmp(style_cstr, "EVT_TREELIST_COLUMN_SORTED")) {
+  return wxEVT_TREELIST_COLUMN_SORTED;
+}
+#pragma endregion
+#pragma region wx/webrequest.h
+if (!strcmp(style_cstr, "EVT_WEBREQUEST_STATE")) {
+  return wxEVT_WEBREQUEST_STATE;
+}
+if (!strcmp(style_cstr, "EVT_WEBREQUEST_DATA")) {
+  return wxEVT_WEBREQUEST_DATA;
+}
+#pragma endregion
+#pragma region wx/webview.h
+if (!strcmp(style_cstr, "EVT_WEBVIEW_NAVIGATING")) {
+  return wxEVT_WEBVIEW_NAVIGATING;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_NAVIGATED")) {
+  return wxEVT_WEBVIEW_NAVIGATED;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_LOADED")) {
+  return wxEVT_WEBVIEW_LOADED;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_ERROR")) {
+  return wxEVT_WEBVIEW_ERROR;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_NEWWINDOW")) {
+  return wxEVT_WEBVIEW_NEWWINDOW;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_TITLE_CHANGED")) {
+  return wxEVT_WEBVIEW_TITLE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_FULLSCREEN_CHANGED")) {
+  return wxEVT_WEBVIEW_FULLSCREEN_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED")) {
+  return wxEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED;
+}
+if (!strcmp(style_cstr, "EVT_WEBVIEW_SCRIPT_RESULT")) {
+  return wxEVT_WEBVIEW_SCRIPT_RESULT;
+}
+#pragma endregion
+#pragma region wx/wizard.h
+if (!strcmp(style_cstr, "EVT_WIZARD_PAGE_CHANGED")) {
+  return wxEVT_WIZARD_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_PAGE_CHANGING")) {
+  return wxEVT_WIZARD_PAGE_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_CANCEL")) {
+  return wxEVT_WIZARD_CANCEL;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_HELP")) {
+  return wxEVT_WIZARD_HELP;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_FINISHED")) {
+  return wxEVT_WIZARD_FINISHED;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_PAGE_SHOWN")) {
+  return wxEVT_WIZARD_PAGE_SHOWN;
+}
+if (!strcmp(style_cstr, "EVT_WIZARD_BEFORE_PAGE_CHANGED")) {
+  return wxEVT_WIZARD_BEFORE_PAGE_CHANGED;
+}
+#pragma endregion
+#pragma region wx/aui/auibook.h
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_PAGE_CLOSE")) {
+  return wxEVT_AUINOTEBOOK_PAGE_CLOSE;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_PAGE_CHANGED")) {
+  return wxEVT_AUINOTEBOOK_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_PAGE_CHANGING")) {
+  return wxEVT_AUINOTEBOOK_PAGE_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_PAGE_CLOSED")) {
+  return wxEVT_AUINOTEBOOK_PAGE_CLOSED;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_BUTTON")) {
+  return wxEVT_AUINOTEBOOK_BUTTON;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_BEGIN_DRAG")) {
+  return wxEVT_AUINOTEBOOK_BEGIN_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_END_DRAG")) {
+  return wxEVT_AUINOTEBOOK_END_DRAG;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_DRAG_MOTION")) {
+  return wxEVT_AUINOTEBOOK_DRAG_MOTION;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_ALLOW_DND")) {
+  return wxEVT_AUINOTEBOOK_ALLOW_DND;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_TAB_MIDDLE_DOWN")) {
+  return wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_TAB_MIDDLE_UP")) {
+  return wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_TAB_RIGHT_DOWN")) {
+  return wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_TAB_RIGHT_UP")) {
+  return wxEVT_AUINOTEBOOK_TAB_RIGHT_UP;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_DRAG_DONE")) {
+  return wxEVT_AUINOTEBOOK_DRAG_DONE;
+}
+if (!strcmp(style_cstr, "EVT_AUINOTEBOOK_BG_DCLICK")) {
+  return wxEVT_AUINOTEBOOK_BG_DCLICK;
+}
+#pragma endregion
+#pragma region wx/aui/framemanager.h
+if (!strcmp(style_cstr, "EVT_AUI_PANE_BUTTON")) {
+  return wxEVT_AUI_PANE_BUTTON;
+}
+if (!strcmp(style_cstr, "EVT_AUI_PANE_CLOSE")) {
+  return wxEVT_AUI_PANE_CLOSE;
+}
+if (!strcmp(style_cstr, "EVT_AUI_PANE_MAXIMIZE")) {
+  return wxEVT_AUI_PANE_MAXIMIZE;
+}
+if (!strcmp(style_cstr, "EVT_AUI_PANE_RESTORE")) {
+  return wxEVT_AUI_PANE_RESTORE;
+}
+if (!strcmp(style_cstr, "EVT_AUI_PANE_ACTIVATED")) {
+  return wxEVT_AUI_PANE_ACTIVATED;
+}
+if (!strcmp(style_cstr, "EVT_AUI_RENDER")) {
+  return wxEVT_AUI_RENDER;
+}
+if (!strcmp(style_cstr, "EVT_AUI_FIND_MANAGER")) {
+  return wxEVT_AUI_FIND_MANAGER;
+}
+#pragma endregion
+#pragma region wx/ribbon/bar.h
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_PAGE_CHANGED")) {
+  return wxEVT_RIBBONBAR_PAGE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_PAGE_CHANGING")) {
+  return wxEVT_RIBBONBAR_PAGE_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TAB_MIDDLE_DOWN")) {
+  return wxEVT_RIBBONBAR_TAB_MIDDLE_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TAB_MIDDLE_UP")) {
+  return wxEVT_RIBBONBAR_TAB_MIDDLE_UP;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TAB_RIGHT_DOWN")) {
+  return wxEVT_RIBBONBAR_TAB_RIGHT_DOWN;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TAB_RIGHT_UP")) {
+  return wxEVT_RIBBONBAR_TAB_RIGHT_UP;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TAB_LEFT_DCLICK")) {
+  return wxEVT_RIBBONBAR_TAB_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_TOGGLED")) {
+  return wxEVT_RIBBONBAR_TOGGLED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBAR_HELP_CLICK")) {
+  return wxEVT_RIBBONBAR_HELP_CLICK;
+}
+#pragma endregion
+#pragma region wx/ribbon/buttonbar.h
+if (!strcmp(style_cstr, "EVT_RIBBONBUTTONBAR_CLICKED")) {
+  return wxEVT_RIBBONBUTTONBAR_CLICKED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED")) {
+  return wxEVT_RIBBONBUTTONBAR_DROPDOWN_CLICKED;
+}
+#pragma endregion
+#pragma region wx/ribbon/gallery.h
+if (!strcmp(style_cstr, "EVT_RIBBONGALLERY_HOVER_CHANGED")) {
+  return wxEVT_RIBBONGALLERY_HOVER_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONGALLERY_SELECTED")) {
+  return wxEVT_RIBBONGALLERY_SELECTED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONGALLERY_CLICKED")) {
+  return wxEVT_RIBBONGALLERY_CLICKED;
+}
+#pragma endregion
+#pragma region wx/ribbon/panel.h
+if (!strcmp(style_cstr, "EVT_RIBBONPANEL_EXTBUTTON_ACTIVATED")) {
+  return wxEVT_RIBBONPANEL_EXTBUTTON_ACTIVATED;
+}
+#pragma endregion
+#pragma region wx/ribbon/toolbar.h
+if (!strcmp(style_cstr, "EVT_RIBBONTOOLBAR_CLICKED")) {
+  return wxEVT_RIBBONTOOLBAR_CLICKED;
+}
+if (!strcmp(style_cstr, "EVT_RIBBONTOOLBAR_DROPDOWN_CLICKED")) {
+  return wxEVT_RIBBONTOOLBAR_DROPDOWN_CLICKED;
+}
+#pragma endregion
+#pragma region wx/richtext/richtextctrl.h
+if (!strcmp(style_cstr, "EVT_RICHTEXT_LEFT_CLICK")) {
+  return wxEVT_RICHTEXT_LEFT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_RIGHT_CLICK")) {
+  return wxEVT_RICHTEXT_RIGHT_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_MIDDLE_CLICK")) {
+  return wxEVT_RICHTEXT_MIDDLE_CLICK;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_LEFT_DCLICK")) {
+  return wxEVT_RICHTEXT_LEFT_DCLICK;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_RETURN")) {
+  return wxEVT_RICHTEXT_RETURN;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_CHARACTER")) {
+  return wxEVT_RICHTEXT_CHARACTER;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_CONSUMING_CHARACTER")) {
+  return wxEVT_RICHTEXT_CONSUMING_CHARACTER;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_DELETE")) {
+  return wxEVT_RICHTEXT_DELETE;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_STYLESHEET_CHANGING")) {
+  return wxEVT_RICHTEXT_STYLESHEET_CHANGING;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_STYLESHEET_CHANGED")) {
+  return wxEVT_RICHTEXT_STYLESHEET_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_STYLESHEET_REPLACING")) {
+  return wxEVT_RICHTEXT_STYLESHEET_REPLACING;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_STYLESHEET_REPLACED")) {
+  return wxEVT_RICHTEXT_STYLESHEET_REPLACED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_CONTENT_INSERTED")) {
+  return wxEVT_RICHTEXT_CONTENT_INSERTED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_CONTENT_DELETED")) {
+  return wxEVT_RICHTEXT_CONTENT_DELETED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_STYLE_CHANGED")) {
+  return wxEVT_RICHTEXT_STYLE_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_PROPERTIES_CHANGED")) {
+  return wxEVT_RICHTEXT_PROPERTIES_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_SELECTION_CHANGED")) {
+  return wxEVT_RICHTEXT_SELECTION_CHANGED;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_BUFFER_RESET")) {
+  return wxEVT_RICHTEXT_BUFFER_RESET;
+}
+if (!strcmp(style_cstr, "EVT_RICHTEXT_FOCUS_OBJECT_CHANGED")) {
+  return wxEVT_RICHTEXT_FOCUS_OBJECT_CHANGED;
+}
+#pragma endregion

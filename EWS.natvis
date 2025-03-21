@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="EWSRegisteredEventData">
+    <DisplayString>{{ id = {window_id} event = {event} callback = {lua_callback_ref} }}</DisplayString>
+    <Expand>
+      <Item Name="[id]">window_id</Item>
+      <Item Name="[event]">event</Item>
+      <Item Name="[ews_window]">ews_window</Item>
+      <Item Name="[callback]">lua_callback_ref</Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>

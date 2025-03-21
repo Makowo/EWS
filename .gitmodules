@@ -1,0 +1,6 @@
+[submodule "Dependencies/HashlistLib"]
+	path = Dependencies/HashlistLib
+	url = https://github.com/HW12Dev/HashlistLib
+[submodule "Dependencies/wxWidgets"]
+	path = Dependencies/wxWidgets
+	url = https://github.com/wxWidgets/wxWidgets

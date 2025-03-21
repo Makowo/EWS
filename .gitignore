@@ -1,0 +1,10 @@
+.vscode
+.xmake
+vsxmake2022
+build
+Dependencies/wxWidgets/lib/vc_lib
+Dependencies/wxWidgets/lib/vc_x64_lib
+
+staging
+
+EWSLib.lua

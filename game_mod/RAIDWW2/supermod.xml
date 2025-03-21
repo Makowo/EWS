@@ -1,0 +1,22 @@
+<mod
+  name="EWS"
+  author="HW12dev"
+  description=""
+  version="1.0"
+  contact="">
+  <hooks>
+    <pre hook_id="lib/entry" script_path="./editor_patches/entry_pre.lua" />
+    <post hook_id="lib/setups/setup" script_path="./editor_patches/setup_post.lua" />
+
+    <pre hook_id="core/lib/setups/coresetup" script_path="./editor_patches/coresetup_pre.lua" />
+    <post hook_id="core/lib/setups/coresetup" script_path="./editor_patches/coresetup_post.lua" />
+
+    <post hook_id="core/lib/system/coremodule" script_path="./editor_patches/coremodule_post.lua" />
+
+    <post hook_id="core/lib/utils/dev/editor/worldholder" script_path="./editor_patches/worldholder_override.lua" />
+
+    <post hook_id="core/lib/utils/dev/editor/coreeditor" script_path="./editor_patches/coreeditor_post.lua" />
+
+  </hooks>
+  
+</mod>
