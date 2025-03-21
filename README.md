@@ -5,7 +5,7 @@ Mod for Diesel Engine games to reimplement the "Bringer of Worlds" level editor 
 **This mod is highly experimental, and will cause a game crash on any failure.**
 
 ###### Image of the Mod working
-![]("/.github/ews-2025-03-21.png")
+![](/.github/ews-2025-03-21.png)
 ###### YouTube Video of the Mod Working
 [![](https://img.youtube.com/vi/IYaGhP9ibMQ/0.jpg)](https://www.youtube.com/watch?v=IYaGhP9ibMQ)
 
