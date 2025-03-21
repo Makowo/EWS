@@ -224,7 +224,7 @@ function CoreSetup:__init()
 
   --managers.editor:do_save("X:/SteamLibrary/steamapps/common/RAID World War II/assets/test_level/world.world", "X:/SteamLibrary/steamapps/common/RAID World War II/assets/test_level/")
   --managers.editor:load_level("levels/vanilla/germany_camp/", "levels/vanilla/germany_camp/world.world")
-  --managers.editor:load_level("levels/vanilla/forest_gumpy/", "levels/vanilla/forest_gumpy/world.world")
+  managers.editor:load_level("levels/vanilla/forest_gumpy/", "levels/vanilla/forest_gumpy/world.world")
 
   --managers.editor:on_unit_tree_browser()
   --managers.editor:load_level("assets/levels/upg_005/fury_railway", "assets/levels/upg_005/fury_railway/world.world")
