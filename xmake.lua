@@ -8,6 +8,8 @@ includes("game_lua")
 includes("test_env")
 includes("version_proxy")
 
+includes("tools/exepatcher")
+
 includes("wxWidgetsPackage.lua")
 
 includes("Dependencies/HashlistLib/xmake.lua")

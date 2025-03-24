@@ -52,7 +52,7 @@ std::string resolve_icon_path(std::string path) {
   if (std::filesystem::exists(path))
     return path;
 
-  return "./assets/core/lib/utils/dev/ews/images/error_32x32.png";
+  return "./assets/core/lib/utils/dev/ews/images/error_16x16.png";
 }
 
 wxImage get_wximage_from_path(std::string path) {
