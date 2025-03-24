@@ -53,9 +53,9 @@ Compiled binaries fall under the licenses of wxWidgets, EWS and MinHook.
 
  - `assets`: Folder containing generic assets needed for the editor to run (editor icons, etc.).
  - `ews_lib`: The core library containing implementations for all UI controls.
+ - `game_cpp`: Game-specific C++ mods implementing any engine version specific variations of features.
  - `game_lua`: Library to allow easily swapping between game-specific implementations of Lua.
  - `game_mod`: Folder containing Lua mods for each game to allow for Bringer of Worlds to run.
- - `pd2`/`pdth`/`raidww2`: Game-specific C++ mods implementing any engine version specific variations of features.
  - `scripts`: Build scripts used by GitHub Actions to automate compiling the project, `buildwxwidgets.py` can be ran to build wxWidgets for you.
  - `test_env`: Deprecated testing environment used before game implementations were written.
  - `version_proxy`: DLL proxy for games to load the EWS library before any others.
