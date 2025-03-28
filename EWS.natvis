@@ -9,4 +9,13 @@
       <Item Name="[callback]">lua_callback_ref</Item>
     </Expand>
   </Type>
+  <Type Name="RAID_CXX14_string">
+    <DisplayString Condition="size &lt; 16">{{ str = {_Buf} }}</DisplayString>
+    <DisplayString Condition="size &gt;= 16">{{ str = {_Ptr} }}</DisplayString>
+    <Expand>
+      <Item Condition="size &lt; 16" Name="[str]">_Buf</Item>
+      <Item Condition="size &gt;= 16" Name="[str]">_Ptr</Item>
+      <Item Name="[size]">size</Item>
+    </Expand>
+  </Type>
 </AutoVisualizer>

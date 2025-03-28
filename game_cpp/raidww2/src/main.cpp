@@ -119,12 +119,21 @@ public:
   size_t reserved_size;
 
 public:
-  std::string get_string() {
+  std::string get_string() const {
     if (size < 16) {
       return std::string(this->_Buf);
     }
     else {
       return std::string(this->_Ptr);
+    }
+  }
+  const char* get_cstring() const
+  {
+    if (size < 16) {
+      return this->_Buf;
+    }
+    else {
+      return this->_Ptr;
     }
   }
 };
@@ -278,42 +287,49 @@ LoadLibrary("DieselLuaDebugger.dll");
 class EWSRegisteredEventData;
 std::vector<EWSRegisteredEventData*> registered_events;
 
+namespace dsl {
+  class DataStore {
+  public:
+    virtual ~DataStore();
+  };
+  template<typename T>
+  class SP {
+    T* _p;
+    unsigned int _c;
+  };
+  class Archive {
+  public:
+    RAID_CXX14_string _name;
+
+    __int64 _pos;
+    //__int64 _start;
+    __int64 _size;
+
+    __int64 unk1;
+
+    bool _sizable;
+    bool _closed;
+
+    __int64 unk2;
+    _RTL_CRITICAL_SECTION _cs;
+
+    dsl::SP<DataStore> _store;
+  };
+  class Transport {
+  public:
+    virtual ~Transport();
+    virtual dsl::Archive* open(dsl::Archive* result, unsigned int db_key);
+  };
+}
+struct ResourceID {
+  dsl::idstring type;
+  dsl::idstring name;
+};
 dsl::idstring last_type;
 dsl::idstring last_name;
 
-__int64(__fastcall* o_dsl__DB__try_open)(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport);
-__int64(__fastcall* o_dsl__DB__try_open_LanguageResolver)(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport);
-__int64(__fastcall* o_dsl__DB__try_open_unk1)(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport);
-__int64 __fastcall h_dsl__DB__try_open(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport) {
-  if (type)
-    last_type = *type;
-  if (name)
-    last_name = *name;
-  std::cout << "[dsl::DB::try_open (Default Resolver)] File: " << attempt_to_find_source_idstring_from_hashlist(last_name, false) << "." << attempt_to_find_source_idstring_from_hashlist(last_type, false) << "\n";
-  auto ret = o_dsl__DB__try_open(thiz, result, type, name, a5, transport);
-  return ret;
-}
-__int64 __fastcall h_dsl__DB__try_open_LanguageResolver(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport) {
-  if (type)
-    last_type = *type;
-  if (name)
-    last_name = *name;
-  std::cout << "[dsl::DB::try_open (LanguageResolver)] File: " << attempt_to_find_source_idstring_from_hashlist(last_name, false) << "." << attempt_to_find_source_idstring_from_hashlist(last_type, false) << "\n";
-  auto ret = o_dsl__DB__try_open_LanguageResolver(thiz, result, type, name, a5, transport);
-  return ret;
-}
-__int64 __fastcall h_dsl__DB__try_open_unk1(__int64 thiz, __int64 result, dsl::idstring* type, dsl::idstring* name, __int64 a5, __int64 transport) {
-  if (type)
-    last_type = *type;
-  if (name)
-    last_name = *name;
-  std::cout << "[dsl::DB::try_open (Unk1)] File: " << attempt_to_find_source_idstring_from_hashlist(last_name, false) << "." << attempt_to_find_source_idstring_from_hashlist(last_type, false) << "\n";
-  auto ret = o_dsl__DB__try_open_unk1(thiz, result, type, name, a5, transport);
-  return ret;
-}
-
-__int64(__fastcall* o_MultiFileTransport__open)(__int64* thiz, __int64* result, unsigned int key);
-__int64 __fastcall h_MultiFileTransport__open(__int64* thiz, __int64* result, unsigned int key) {
+__int64(__fastcall* o_MultiFileTransport__open)(__int64* thiz, dsl::Archive* result, unsigned int key);
+__int64 __fastcall h_MultiFileTransport__open(__int64* thiz, dsl::Archive* result, unsigned int key) {
   auto ret = o_MultiFileTransport__open(thiz, result, key);
 
   PWSTR desc;
@@ -347,10 +363,6 @@ HANDLE __stdcall h_CreateFileW(LPCWSTR lpFileName, DWORD desiredAccess, DWORD sh
   return ret;
 }
 
-struct ResourceID {
-  dsl::idstring type;
-  dsl::idstring name;
-};
 void* (__fastcall* o_PackageManager__resource)(__int64* thiz, ResourceID* r);
 void* __fastcall h_PackageManager__resource(__int64* thiz, ResourceID* r) {
   auto ret = o_PackageManager__resource(thiz, r);
@@ -373,12 +385,32 @@ __int64 __fastcall h_Package__preload(__int64 thiz, ResourceID* a2, char a3, cha
   return ret;
 }
 
+#define DB_TRY_OPEN(variant) \
+__int64(__fastcall* o_dsl__DB__try_open_##variant)(__int64 thiz, dsl::Archive* result, dsl::idstring* type, dsl::idstring* name, __int64 a5, dsl::Transport* transport);\
+__int64 __fastcall h_dsl__DB__try_open_##variant(__int64 thiz, dsl::Archive* result, dsl::idstring* type, dsl::idstring* name, __int64 a5, dsl::Transport* transport)
+
+#define CALL_ORIGINAL_TRY_OPEN(variant, ...) o_dsl__DB__try_open_##variant(__VA_ARGS__)
+
+DB_TRY_OPEN(0)
+{
+  auto return_val = CALL_ORIGINAL_TRY_OPEN(0, thiz, result, type, name, a5, transport);
+
+  std::cout << "[DB::try_open] file: " << attempt_to_find_source_idstring_from_hashlist(*name) << "." << attempt_to_find_source_idstring_from_hashlist(*type) << "\n";
+
+  return return_val;
+}
+
 void MultiFileTransportTesting() {
   //AllocConsole();
   //freopen("CONOUT$", "w", stdout);
   //load_hashlist();
 
-  auto MultiFileTransport__open = FindPattern("raid_win64_release.exe", "MultiFileTransport::open", "\x48\x8B\xC4\x48\x89\x58\x00\x57\x48\x81\xEC\x00\x00\x00\x00\x0F\x29\x70\x00\x48\x8B\xFA\x48\x8B\xD9", "xxxxxx?xxxx????xxx?xxxxxx");
+  // u24.3 and below
+  //auto MultiFileTransport__open = FindPattern("raid_win64_release.exe", "MultiFileTransport::open", "\x48\x8B\xC4\x48\x89\x58\x00\x57\x48\x81\xEC\x00\x00\x00\x00\x0F\x29\x70\x00\x48\x8B\xFA\x48\x8B\xD9", "xxxxxx?xxxx????xxx?xxxxxx");
+
+  // u24.4
+  auto MultiFileTransport__open = FindPattern("raid_win64_release.exe", "MultiFileTransport::open", "\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x48\x89\x54\x24\x00\x57\x48\x81\xEC", "xxxx?xxxx?xxxx?xxxx?xxxx");
+
   auto dsl__DB__try_open = FindPattern("raid_win64_release.exe", "dsl::DB::try_open", "\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x48\x89\x4C\x24\x00\x57\x41\x56\x41\x57\x48\x83\xEC\x00\x49\x8B\xF9", "xxxx?xxxx?xxxx?xxxx?xxxxxxxx?xxx");
   //auto dsl__DB__try_open_LanguageResolver = (unsigned long long)((uint64_t)GetModuleHandle("raid_win64_release.exe") + 0x1636A0);//*(unsigned long long*)FindPattern("raid_win64_release.exe", "dsl::DB::try_open_LanguageResolver_xref", "\xE8\x00\x00\x00\x00\xC7\x44\x24\x00\x00\x00\x00\x00\x48\x83\x7F", "x????xxx?????xxx");
   //auto dsl__DB__try_open_unk1 = (unsigned long long)((uint64_t)GetModuleHandle("raid_win64_release.exe") + 0x466E0);
@@ -393,6 +425,12 @@ void MultiFileTransportTesting() {
 
   //auto dsl__DB__try_open_LanguageResolver = db_try_open[2];
   //auto dsl__DB__try_open_unk1 = db_try_open[1];
+
+#define HOOK_DB_TRY_OPEN(variant) \
+MH_CreateHook((LPVOID)db_try_open[variant], &h_dsl__DB__try_open_##variant, (LPVOID*)&o_dsl__DB__try_open_##variant); \
+MH_EnableHook((LPVOID)db_try_open[variant]);
+
+  HOOK_DB_TRY_OPEN(0);
 
   MH_CreateHook((LPVOID)MultiFileTransport__open, &h_MultiFileTransport__open, reinterpret_cast<LPVOID*>(&o_MultiFileTransport__open));
   MH_EnableHook((LPVOID)MultiFileTransport__open);
