@@ -7,9 +7,12 @@
 #include "ews_utils.h"
 
 class Dialog : public Window {
+  COMPONENT_CHILD_CLASS(Dialog);
 public:
-  static void Add_Dialog_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
+
 public:
+  static int Lua_Create(lua_State* L);
   static int Lua_Create_Simple(lua_State* L);
   static int Lua_Create_Complex(lua_State* L);
 

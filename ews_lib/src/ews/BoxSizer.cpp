@@ -2,18 +2,14 @@
 
 #include "component.h"
 
-static const std::vector<luaL_Reg> BoxSizer_methods = {
-  {"EWS_BoxSizer_Add", BoxSizer::Lua_Add}
-};
-
-void BoxSizer::Add_BoxSizer_Funcs(lua_State* L) {
-  for (int i = 0; i < BoxSizer_methods.size(); i++) {
-    lua_register(L, BoxSizer_methods[i].name, BoxSizer_methods[i].func);
-  }
+void BoxSizer::AddLuaFunctions(lua_State* L)
+{
+  Sizer::AddLuaFunctions(L);
+  //REGISTER_LUA_CLASS_FUNCTION(BoxSizer::Lua_Add, "");
 }
 
 int BoxSizer::Lua_Create(lua_State* L) {
-  auto orient = lua_tostring(L, 1);
+  auto orient = lua_tostring(L, 2);
 
   auto sizer = create_new_ews_object<BoxSizer>(L);
 

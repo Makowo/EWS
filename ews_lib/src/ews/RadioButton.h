@@ -6,8 +6,9 @@
 #include <wx/radiobut.h>
 
 class RadioButton : public Control {
+  COMPONENT_CHILD_CLASS(RadioButton);
 public:
-  static void Add_RadioButton_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

@@ -1,17 +1,17 @@
 
 #include "CheckBox.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_CheckBox_GetValue", CheckBox::Lua_GetValue},
-  {"EWS_CheckBox_SetValue", CheckBox::Lua_SetValue},
-};
-
-ADD_FUNCS_AUTOFILL(CheckBox::Add_CheckBox_Funcs)
+void CheckBox::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(CheckBox::Lua_GetValue, "get_value");
+  REGISTER_LUA_CLASS_FUNCTION(CheckBox::Lua_SetValue, "set_value");
+}
 
 int CheckBox::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto name = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto name = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
 
   auto checkbox = create_new_ews_object<CheckBox>(L);
 

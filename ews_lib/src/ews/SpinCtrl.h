@@ -6,8 +6,9 @@
 #include <wx/spinctrl.h>
 
 class SpinCtrl : public Control {
+  COMPONENT_CHILD_CLASS(SpinCtrl);
 public:
-  static void Add_SpinCtrl_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

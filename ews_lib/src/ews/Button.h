@@ -3,8 +3,9 @@
 #include "AnyButton.h"
 
 class Button : public AnyButton {
+  COMPONENT_CHILD_CLASS(Button);
 public:
-  static void Add_Button_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

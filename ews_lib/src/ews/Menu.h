@@ -7,8 +7,9 @@
 #include <wx/wx.h>
 
 class Menu : public Component {
-  public:
-  static void Add_Menu_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(Menu);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);

@@ -6,8 +6,9 @@ header_template = """
 #include "PARENTNAME.h"
 
 class CLASSNAME : public PARENTNAME {
+  COMPONENT_CHILD_CLASS(CLASSNAME);
 public:
-  static void Add_CLASSNAME_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);
@@ -20,10 +21,10 @@ private:
 class_template = """
 #include "CLASSNAME.h"
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(CLASSNAME::Add_CLASSNAME_Funcs)
+void CLASSNAME::AddLuaFunctions(lua_State* L)
+{
+  PARENTNAME::AddLuaFunctions(L);
+}
 
 int CLASSNAME::Lua_Create(lua_State* L) {
 

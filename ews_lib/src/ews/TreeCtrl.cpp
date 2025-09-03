@@ -3,15 +3,15 @@
 
 #include <wx/treectrl.h>
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(TreeCtrl::Add_TreeCtrl_Funcs)
+void TreeCtrl::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+}
 
 int TreeCtrl::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto unk1 = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto unk1 = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
 
   auto treectrl = create_new_ews_object<TreeCtrl>(L);
 

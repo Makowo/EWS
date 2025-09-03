@@ -1241,12 +1241,6 @@ if EWS_clazz == nil or EWS == nil then
   function EWS_clazz:RadioButton(parent, name, group, style)
     return EWS_RadioButton:new(parent, name, group, style)
   end
-
-  function EWS_clazz:StaticLine(parent, name, style)
-    local fake = EWS:StaticText(parent, "", 0, style)
-    return fake
-  end
-
   function EWS_clazz:ListBox(parent, name, style)
     local fake = EWS:Panel(parent, name, "")
     fake.clear = function(self) end
@@ -1274,16 +1268,6 @@ if EWS_clazz == nil or EWS == nil then
     local fake = EWS:Panel(parent, "fakename", "")
     fake.set_value = function(self, value) end
     --EWS_Log("EWS:Slider")
-    return fake
-  end
-
-  function EWS_clazz:ColorSpectrum(parent, ...)
-    local fake = EWS:Panel(parent, "COLORSPECTRUM_FAKE_PANEL", "")
-    return fake
-  end
-
-  function EWS_clazz:ColorSlider(parent, ...)
-    local fake = EWS:Panel(parent, "COLORSPECTRUM_FAKE_PANEL", "")
     return fake
   end
 
@@ -1325,4 +1309,19 @@ _G.EWS = _G.EWS or EWS_clazz:new()
 
 --log(EWS_clazz:Frame("test.txt"))
 --setmetatable(EWS, EWS)
+end
+
+
+local EWS_clazzz = __classes["EWS"]
+function EWS_clazzz:ColorSpectrum(parent, ...)
+  local fake = EWS:Panel(parent, "COLORSPECTRUM_FAKE_PANEL", "")
+  return fake
+end
+function EWS_clazzz:ColorSlider(parent, ...)
+  local fake = EWS:Panel(parent, "COLORSPECTRUM_FAKE_PANEL", "")
+  return fake
+end
+function EWS_clazzz:StaticLine(parent, name, style)
+  local fake = EWS:StaticText(parent, "", 0, style)
+  return fake
 end

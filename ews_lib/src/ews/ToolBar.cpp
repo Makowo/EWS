@@ -4,24 +4,24 @@
 
 #include "Control.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_ToolBar_AddSeparator", ToolBar::Lua_AddSeparator},
-  {"EWS_ToolBar_AddTool", ToolBar::Lua_AddTool},
-  {"EWS_ToolBar_AddCheckTool", ToolBar::Lua_AddCheckTool},
-  {"EWS_ToolBar_AddRadioTool", ToolBar::Lua_AddRadioTool},
-  {"EWS_ToolBar_AddControl", ToolBar::Lua_AddControl},
-  {"EWS_ToolBar_Realize", ToolBar::Lua_Realize},
-
-  {"EWS_ToolBar_GetToolState", ToolBar::Lua_GetToolState},
-  {"EWS_ToolBar_SetToolState", ToolBar::Lua_SetToolState},
-};
-
-ADD_FUNCS_AUTOFILL(ToolBar::Add_ToolBar_Funcs)
+void ToolBar::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_AddTool, "add_tool");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_AddCheckTool, "add_check_tool");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_AddRadioTool, "add_radio_tool");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_AddSeparator, "add_separator");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_AddControl, "add_control");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_GetToolState, "tool_state");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_SetToolState, "set_tool_state");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_SetToolEnabled, "set_tool_enabled");
+  REGISTER_LUA_CLASS_FUNCTION(ToolBar::Lua_Realize, "realize");
+}
 
 int ToolBar::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  std::string id = lua_tostring(L, 2);
-  std::string style = lua_tostring(L, 3);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  std::string id = lua_tostring(L, 3);
+  std::string style = lua_tostring(L, 4);
 
   
   auto toolbar = create_new_ews_object<ToolBar>(L);
@@ -43,7 +43,9 @@ int ToolBar::Lua_AddTool(lua_State* L) {
   std::string id = lua_tostring(L, 2);
   std::string name = lua_tostring(L, 3);
   std::string image_path = lua_tostring(L, 4);
-  std::string description = lua_tostring(L, 5);
+  std::string description;
+  if (lua_type(L, 5) == LUA_TSTRING)
+    description = lua_tostring(L, 5);
 
   DISABLE_IMAGE_LOAD_WARNING
   wxImage icon = get_wximage_from_path(resolve_icon_path(image_path));
@@ -64,7 +66,9 @@ int ToolBar::Lua_AddCheckTool(lua_State* L) {
   std::string id = lua_tostring(L, 2);
   std::string name = lua_tostring(L, 3);
   std::string image_path = lua_tostring(L, 4);
-  std::string description = lua_tostring(L, 5);
+  std::string description;
+  if(lua_type(L, 5) == LUA_TSTRING)
+    description = lua_tostring(L, 5);
 
 
   DISABLE_IMAGE_LOAD_WARNING
@@ -80,7 +84,9 @@ int ToolBar::Lua_AddRadioTool(lua_State *L) {
   std::string id = lua_tostring(L, 2);
   std::string name = lua_tostring(L, 3);
   std::string image_path = lua_tostring(L, 4);
-  std::string description = lua_tostring(L, 5);
+  std::string description;
+  if (lua_type(L, 5) == LUA_TSTRING)
+    description = lua_tostring(L, 5);
 
   DISABLE_IMAGE_LOAD_WARNING
   wxImage icon = get_wximage_from_path(resolve_icon_path(image_path));
@@ -122,6 +128,17 @@ int ToolBar::Lua_SetToolState(lua_State* L) {
   auto state = lua_toboolean(L, 3);
 
   toolbar->get_internal_object_type<wxToolBar>()->EnableTool(get_winid_from_string(id), state);
+
+  return 0;
+}
+
+int ToolBar::Lua_SetToolEnabled(lua_State* L)
+{
+  auto toolbar = get_ews_object_from_top<ToolBar>(L, 1);
+  auto id = lua_tostring(L, 2);
+  auto enabled = lua_toboolean(L, 3);
+
+  toolbar->get_internal_object_type<wxToolBar>()->EnableTool(get_winid_from_string(id), enabled);
 
   return 0;
 }

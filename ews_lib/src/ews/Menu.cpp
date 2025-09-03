@@ -1,26 +1,27 @@
 #include "Menu.h"
+#include "ListCtrl.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_Menu_AppendItem", Menu::Lua_AppendItem},
-  {"EWS_Menu_AppendSeparator", Menu::Lua_AppendSeparator},
-  {"EWS_Menu_AppendMenu", Menu::Lua_AppendMenu},
-  {"EWS_Menu_AppendCheckItem", Menu::Lua_AppendCheckItem},
-  {"EWS_Menu_AppendRadioItem", Menu::Lua_AppendRadioItem},
+void Menu::AddLuaFunctions(lua_State* L)
+{
+  Component::AddLuaFunctions(L);
 
-  {"EWS_Menu_Clear", Menu::Lua_Clear},
-
-  {"EWS_Menu_SetChecked", Menu::Lua_SetChecked},
-  {"EWS_Menu_IsChecked", Menu::Lua_IsChecked},
-};
-
-ADD_FUNCS_AUTOFILL(Menu::Add_Menu_Funcs)
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_AppendItem, "append_item");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_AppendSeparator, "append_separator");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_AppendMenu, "append_menu");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_AppendRadioItem, "append_radio_item");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_AppendCheckItem, "append_check_item");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_SetChecked, "set_checked");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_IsChecked, "is_checked");
+  REGISTER_LUA_CLASS_FUNCTION(Menu::Lua_Clear, "clear");
+}
 
 int Menu::Lua_Create(lua_State* L) {
-  auto style = lua_tostring(L, 1);
+  auto style = lua_tostring(L, 2);
   Menu* menu = create_new_ews_object<Menu>(L);
   menu->init(style);
   return 1;
 }
+
 int Menu::Lua_AppendItem(lua_State* L) {
   auto menu = get_ews_object_from_top<Menu>(L, 1);
   const char* id = lua_tostring(L, 2);

@@ -104,7 +104,7 @@ struct dsl__LuaInterpreter {
     (this->*o_constructor)(thread, libs, classes, main, a);
 
     if (main && libs) {
-      EWS::add_members(L);
+      //EWS::add_members(L);
       lua_register(L, "EWS_Log", EWS_Log);
       lua_register(L, "dofile", luaB_dofile);
 
@@ -225,11 +225,14 @@ struct Application {
   }
 };
 
+typedef void (__cdecl *LuaInterpreter_initializer)(lua_State* L);
+void(__cdecl* dsl__LuaInterpreter__register_initializer)(LuaInterpreter_initializer func);
+
 void setup_EWS() {
   if(AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole())
     freopen("CONOUT$", "w", stdout);
 
-  pdth_lua_setup();
+  pdth_lua_setup(FindPattern);
 
   wxApp::SetInstance(new DieselApp());
 
@@ -245,12 +248,16 @@ void setup_EWS() {
   load_hashlist();
 
   luaB_dofile = (lua_CFunction)FindPattern("payday_win32_release.exe", "luaB_dofile", "\x56\x8B\x74\x24\x00\x8B\x46\x00\x57\x3B\x46\x00\x73\x00\x3D\x00\x00\x00\x00\x74\x00\x83\x78\x00\x00\x7F", "xxxx?xx?xxx?x?x????x?xx??x");
+  dsl__LuaInterpreter__register_initializer = (decltype(dsl__LuaInterpreter__register_initializer))FindPattern("payday_win32_release.exe", "", "\x64\xA1\x00\x00\x00\x00\x6A\x00\x68\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\xA1\x00\x00\x00\x00\x83\xEC\x00\x53\x8B\x5C\x24", "xx????x?x????xxxx????x????xx?xxxx");
+
+  dsl__LuaInterpreter__register_initializer(EWS::add_members);
 
   X86_THISCALL_HOOK_HELPER_HOOK_CLASS_FUNCTION(Application, update, "\x55\x8B\xEC\x83\xE4\x00\x6A\x00\x64\xA1\x00\x00\x00\x00\x68\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC", "xxxxx?x?xx????x????xxxx????xx");
   X86_THISCALL_HOOK_HELPER_HOOK_CLASS_FUNCTION(dsl__LuaInterpreter, constructor, "\x6A\x00\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x83\xEC\x00\x53\x33\xDB\x56\x8B\xF1\x89\x1E", "x?x????xx????xxxx????xx?xxxxxxxx");
   X86_THISCALL_HOOK_HELPER_HOOK_CLASS_FUNCTION(dsl__LuaRuntimeError, constructor, "\x6A\x00\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x81\xEC\x00\x00\x00\x00\x53\x55\x56\x57\x8B\xBC\x24\x00\x00\x00\x00\x33\xDB", "x?x????xx????xxxx????xx????xxxxxxx????xx");
   X86_THISCALL_HOOK_HELPER_HOOK_CLASS_FUNCTION(FileDataStore, constructor, "\x6A\x00\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x83\xEC\x00\x53\x56\x8B\xF1\x57\x89\x74\x24\x00\x8B\x7C\x24", "x?x????xx????xxxx????xx?xxxxxxxx?xxx");
   X86_NON_THISCALL_HOOK_HELPER_HOOK_FUNCTION(ScriptIdstring__add_members, "\x56\x8B\x74\x24\x00\x33\xC9\x51\xB8\x00\x00\x00\x00\x68\x00\x00\x00\x00\x56\xA3\x00\x00\x00\x00\x89\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\x6A\x00\x56\xE8\x00\x00\x00\x00\x33\xC9\x51\xB8\x00\x00\x00\x00\x68\x00\x00\x00\x00\x56\xA3\x00\x00\x00\x00\x89\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x68\x00\x00\x00\x00\x6A\x00\x56\xE8\x00\x00\x00\x00\x6A", "xxxx?xxxx????x????xx????xx????x????x????x?xx????xxxx????x????xx????xx????x????x????x?xx????x");
+  
 }
 
 BOOL __stdcall DllMain(HINSTANCE, DWORD reason, LPVOID reserved) {

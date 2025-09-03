@@ -3,11 +3,11 @@
 
 #include "ews_utils.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_MenuBar_Append", MenuBar::Lua_Append}
-};
-
-ADD_FUNCS_AUTOFILL(MenuBar::Add_MenuBar_Funcs)
+void MenuBar::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(MenuBar::Lua_Append, "append");
+}
 
 int MenuBar::Lua_Create(lua_State* L) {
   MenuBar* bar = create_new_ews_object<MenuBar>(L);

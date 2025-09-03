@@ -54,39 +54,41 @@
 
 #include <filesystem>
 
-static const std::vector<luaL_Reg> EWS_methods = {
-  {"EWS_New_Frame", Frame::Lua_Create},
-  {"EWS_New_BoxSizer", BoxSizer::Lua_Create},
-  {"EWS_New_StaticBoxSizer", StaticBoxSizer::Lua_Create},
-  {"EWS_New_Dialog_Simple", Dialog::Lua_Create_Simple},
-  {"EWS_New_Dialog_Complex", Dialog::Lua_Create_Complex},
-  {"EWS_New_MessageDialog", MessageDialog::Lua_Create},
-  {"EWS_New_MenuBar", MenuBar::Lua_Create},
-  {"EWS_New_Menu", Menu::Lua_Create},
-  {"EWS_New_Panel", Panel::Lua_Create},
-  {"EWS_New_ToolBar", ToolBar::Lua_Create},
-  {"EWS_New_Notebook", Notebook::Lua_Create},
-  {"EWS_New_SplitterWindow", SplitterWindow::Lua_Create},
-  {"EWS_New_StaticText", StaticText::Lua_Create},
-  {"EWS_New_AppWindow", AppWindow::Lua_Create},
-  {"EWS_New_TextCtrl", TextCtrl::Lua_Create},
-  {"EWS_New_Button", Button::Lua_Create},
-  {"EWS_New_ToggleButton", ToggleButton::Lua_Create},
-  {"EWS_New_ScrolledWindow", ScrolledWindow::Lua_Create},
-  {"EWS_New_StatusBar", StatusBar::Lua_Create},
-  {"EWS_New_ProgressDialog", ProgressDialog::Lua_Create},
-  {"EWS_New_FileDialog", FileDialog::Lua_Create},
-  {"EWS_New_ComboBox", ComboBox::Lua_Create},
-  {"EWS_New_CheckBox", CheckBox::Lua_Create},
-  {"EWS_New_SpinCtrl", SpinCtrl::Lua_Create},
+int EWS_Lua_SystemFileExists(lua_State* L);
 
-  {"EWS_New_BitmapButton", BitmapButton::Lua_Create},
-  {"EWS_New_ListBox", ListBox::Lua_Create},
-  {"EWS_New_ListCtrl", ListCtrl::Lua_Create},
-  {"EWS_New_TreeCtrl", TreeCtrl::Lua_Create},
-  {"EWS_New_Slider", Slider::Lua_Create},
-  {"EWS_New_SpinButton", SpinButton::Lua_Create},
-  {"EWS_New_RadioButton", RadioButton::Lua_Create},
+static const std::vector<luaL_Reg> EWS_methods = {
+  {"Frame", Frame::Lua_Create},
+  {"BoxSizer", BoxSizer::Lua_Create},
+  {"StaticBoxSizer", StaticBoxSizer::Lua_Create},
+  {"Dialog", Dialog::Lua_Create},
+  {"MessageDialog", MessageDialog::Lua_Create},
+  {"MenuBar", MenuBar::Lua_Create},
+  {"Menu", Menu::Lua_Create},
+  {"Panel", Panel::Lua_Create},
+  {"ToolBar", ToolBar::Lua_Create},
+  {"Notebook", Notebook::Lua_Create},
+  {"SplitterWindow", SplitterWindow::Lua_Create},
+  {"StaticText", StaticText::Lua_Create},
+  {"AppWindow", AppWindow::Lua_Create},
+  {"TextCtrl", TextCtrl::Lua_Create},
+  {"Button", Button::Lua_Create},
+  {"ToggleButton", ToggleButton::Lua_Create},
+  {"ScrolledWindow", ScrolledWindow::Lua_Create},
+  {"StatusBar", StatusBar::Lua_Create},
+  {"ProgressDialog", ProgressDialog::Lua_Create},
+  {"FileDialog", FileDialog::Lua_Create},
+  {"ComboBox", ComboBox::Lua_Create},
+  {"CheckBox", CheckBox::Lua_Create},
+  {"SpinCtrl", SpinCtrl::Lua_Create},
+  {"BitmapButton", BitmapButton::Lua_Create},
+  {"ListBox", ListBox::Lua_Create},
+  {"ListCtrl", ListCtrl::Lua_Create},
+  {"TreeCtrl", TreeCtrl::Lua_Create},
+  {"Slider", Slider::Lua_Create},
+  {"SpinButton", SpinButton::Lua_Create},
+  {"RadioButton", RadioButton::Lua_Create},
+
+  {"system_file_exists", EWS_Lua_SystemFileExists},
 };
 
 int EWS_Lua_GetDataFolder(lua_State* L) {
@@ -104,7 +106,7 @@ int EWS_Lua_GetDataFolder(lua_State* L) {
 int EWS_Lua_SystemFileExists(lua_State* L) {
   auto path = lua_tostring(L, 1);
   if (path == nullptr) {
-    std::cout << "File: " << path << " does not exist." << std::endl;
+    //std::cout << "File: " << path << " does not exist." << std::endl;
     lua_pushboolean(L, false);
     return 1;
   }
@@ -200,6 +202,32 @@ int EWS_Lua_LaunchURL(lua_State* L) {
 }
 
 void EWS::add_members(lua_State* L) {
+  lua_pushlightuserdata(L, nullptr);
+  lua_createtable(L, 0, 0);
+  lua_pushvalue(L, -1);
+
+  lua_setmetatable(L, -3);
+
+  lua_getglobal(L, "__classes");
+  lua_pushvalue(L, -2);
+  lua_setfield(L, -2, "EWS");
+  lua_pop(L, 1);
+
+  lua_pushvalue(L, -1);
+  lua_setfield(L, -2, "__index");
+
+  for (auto& method : EWS_methods) {
+    lua_pushcclosure(L, method.func, 0);
+    lua_setfield(L, -2, method.name);
+  }
+
+  lua_pop(L, 1);
+
+  lua_setglobal(L, "EWS");
+
+  lua_settop(L, 0);
+  
+  return;
   // EWS functions, added in order of when they're called
 
   lua_register(L, "EWS_EWSModExistsCookie", EWS_EWSModExistsCookie);
@@ -214,49 +242,4 @@ void EWS::add_members(lua_State* L) {
 
   lua_register(L, "EWS_AddStringToHashlist", EWS_AddStringToHashlist);
 
-  for(int i = 0; i < EWS_methods.size(); i++) {
-    lua_register(L, EWS_methods[i].name, EWS_methods[i].func);
-  }
-
-  Register_EventHandling_Functions(L);
-
-  Frame::Add_Frame_Funcs(L);
-  BoxSizer::Add_BoxSizer_Funcs(L);
-  StaticBoxSizer::Add_StaticBoxSizer_Funcs(L);
-  Dialog::Add_Dialog_Funcs(L);
-  MessageDialog::Add_MessageDialog_Funcs(L);
-  MenuBar::Add_MenuBar_Funcs(L);
-  Menu::Add_Menu_Funcs(L);
-  Panel::Add_Panel_Funcs(L);
-  ToolBar::Add_ToolBar_Funcs(L);
-  Sizer::Add_Sizer_Funcs(L);
-  Notebook::Add_Notebook_Funcs(L);
-  SplitterWindow::Add_SplitterWindow_Funcs(L);
-  StaticText::Add_StaticText_Funcs(L);
-  Window::Add_Window_Funcs(L);
-  AppWindow::Add_AppWindow_Funcs(L);
-
-  ProgressDialog::Add_ProgressDialog_Funcs(L);
-  FileDialog::Add_FileDialog_Funcs(L);
-
-  ScrolledWindow::Add_ScrolledWindow_Funcs(L);
-  
-  StatusBar::Add_StatusBar_Funcs(L);
-
-  TextCtrl::Add_TextCtrl_Funcs(L);
-  SpinCtrl::Add_SpinCtrl_Funcs(L);
-  ListCtrl::Add_ListCtrl_Funcs(L);
-  TreeCtrl::Add_TreeCtrl_Funcs(L);
-
-  ComboBox::Add_ComboBox_Funcs(L);
-  ListBox::Add_ListBox_Funcs(L);
-  CheckBox::Add_CheckBox_Funcs(L);
-
-  Slider::Add_Slider_Funcs(L);
-
-  AnyButton::Add_AnyButton_Funcs(L);
-  Button::Add_Button_Funcs(L);
-  ToggleButton::Add_ToggleButton_Funcs(L);
-  BitmapButton::Add_BitmapButton_Funcs(L);
-  SpinButton::Add_SpinButton_Funcs(L);
 }

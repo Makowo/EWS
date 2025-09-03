@@ -1,22 +1,28 @@
 #include "Dialog.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_Dialog_ShowModal", Dialog::Lua_ShowModal},
-  {"EWS_Dialog_EndModal", Dialog::Lua_EndModal},
-  {"EWS_Dialog_SetIcon", Dialog::Lua_SetIcon},
-  {"EWS_Dialog_Visible", Dialog::Lua_Visible}
-};
-
-void Dialog::Add_Dialog_Funcs(lua_State* L) {
-  for (int i = 0; i < methods.size(); i++) {
-    lua_register(L, methods[i].name, methods[i].func);
-  }
+void Dialog::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_ShowModal, "show_model");
+  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_EndModal, "end_modal");
+  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_SetIcon, "set_icon");
+  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_Visible, "visible");
 }
 
-int Dialog::Lua_Create_Simple(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  auto title = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+
+int Dialog::Lua_Create(lua_State* L)
+{
+  if (lua_type(L, 5) == LUA_TSTRING)
+    return Lua_Create_Simple(L);
+
+  return Lua_Create_Complex(L);
+}
+
+int Dialog::Lua_Create_Simple(lua_State* L)
+{
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  auto title = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 5);
 
   auto dialog = create_new_ews_object<Dialog>(L);
 
@@ -26,11 +32,11 @@ int Dialog::Lua_Create_Simple(lua_State* L) {
 }
 
 int Dialog::Lua_Create_Complex(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  auto title = lua_tostring(L, 2);
-  auto position = get_vec3_from_arg(L, 3);
-  auto size = get_vec3_from_arg(L, 4);
-  auto style = lua_tostring(L, 5);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  auto title = lua_tostring(L, 3);
+  auto position = get_vec3_from_arg(L, 5);
+  auto size = get_vec3_from_arg(L, 6);
+  auto style = lua_tostring(L, 7);
 
   auto dialog = create_new_ews_object<Dialog>(L);
 

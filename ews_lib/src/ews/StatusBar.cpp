@@ -1,21 +1,21 @@
 #include "StatusBar.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_StatusBar_SetStatusText", StatusBar::Lua_SetStatusText}
-};
-
-ADD_FUNCS_AUTOFILL(StatusBar::Add_StatusBar_Funcs)
+void StatusBar::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(StatusBar::Lua_SetStatusText, "set_status_text");
+}
 
 int StatusBar::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
 
   const char* unk1 = "";
-  if (lua_type(L, 2) != LUA_TNIL) {
-    unk1 = lua_tostring(L, 2);
+  if (lua_type(L, 3) != LUA_TNIL) {
+    unk1 = lua_tostring(L, 3);
   }
   const char* unk2 = "";
-  if (lua_type(L, 3) != LUA_TNIL) {
-    unk2 = lua_tostring(L, 3);
+  if (lua_type(L, 4) != LUA_TNIL) {
+    unk2 = lua_tostring(L, 4);
   }
 
   auto status_bar = create_new_ews_object<StatusBar>(L);

@@ -1,18 +1,18 @@
 
 #include "ComboBox.h"
 
-static const std::vector<luaL_Reg> methods = {
-  TEXTENTRY_METHODS_LIST(ComboBox)
-  {"EWS_ComboBox_Append", ComboBox::Lua_Append }
-};
-
-ADD_FUNCS_AUTOFILL(ComboBox::Add_ComboBox_Funcs)
+void ComboBox::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+  TEXTENTRY_METHODS_LIST(ComboBox);
+  REGISTER_LUA_CLASS_FUNCTION(ComboBox::Lua_Append, "append");
+}
 
 int ComboBox::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto unk1 = lua_tostring(L, 2);
-  auto unk2 = lua_tostring(L, 3);
-  auto style = lua_tostring(L, 4);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto unk1 = lua_tostring(L, 3);
+  auto unk2 = lua_tostring(L, 4);
+  auto style = lua_tostring(L, 5);
 
   auto combobox = create_new_ews_object<ComboBox>(L);
 

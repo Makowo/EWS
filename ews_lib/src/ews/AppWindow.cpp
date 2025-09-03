@@ -6,15 +6,15 @@
 
 #include <dinput.h>
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(AppWindow::Add_AppWindow_Funcs)
+void AppWindow::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+}
 
 int AppWindow::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  Vector3* size = get_vec3_from_arg(L, 2);
-  std::string style = lua_tostring(L, 3);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  Vector3* size = get_vec3_from_arg(L, 3);
+  std::string style = lua_tostring(L, 4);
 
   AppWindow* appwindow = create_new_ews_object<AppWindow>(L);
 

@@ -8,6 +8,21 @@
 
 #include <cstdlib>
 
+EXPORT_API void lua_createtable(lua_State* L, int narr, int nrec)
+{
+  return funcptr_lua_createtable(L, narr, nrec);
+}
+
+EXPORT_API int lua_setmetatable(lua_State* L, int index)
+{
+  return funcptr_lua_setmetatable(L, index);
+}
+
+EXPORT_API void lua_pushlightuserdata(lua_State* L, void* p)
+{
+  funcptr_lua_pushlightuserdata(L, p);
+}
+
 EXPORT_API lua_State* lua_newstate(lua_Alloc f, void *ud) { return funcptr_lua_newstate(f, ud); }
 EXPORT_API void lua_pushcclosure(lua_State *L, lua_CFunction fn, int n) { return funcptr_lua_pushcclosure(L, fn, n); }
 EXPORT_API void lua_pushstring(lua_State *L, const char *s) { return funcptr_lua_pushstring(L, s); }

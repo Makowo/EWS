@@ -7,8 +7,9 @@
 #include "./TextEntry.h"
 
 class TextCtrl : public Control {
+  COMPONENT_CHILD_CLASS(TextCtrl);
 public:
-  static void Add_TextCtrl_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

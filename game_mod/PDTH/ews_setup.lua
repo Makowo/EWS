@@ -1,5 +1,3 @@
-EWS_Log("test")
-
 local post_hooks = {}
 local pre_hooks = {}
 

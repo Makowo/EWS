@@ -7,8 +7,9 @@
 #include "Window.h"
 
 class ToolBar : public Window {
-  public:
-  static void Add_ToolBar_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(ToolBar);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);
@@ -22,6 +23,7 @@ class ToolBar : public Window {
 
   static int Lua_GetToolState(lua_State* L);
   static int Lua_SetToolState(lua_State* L);
+  static int Lua_SetToolEnabled(lua_State* L);
 
   static int Lua_Realize(lua_State* L);
 

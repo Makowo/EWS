@@ -104,15 +104,32 @@ DEFINE_EVENT_FUNCTION(EVT_KEY_DOWN, wxKeyEvent, false)
 
 
 std::vector<EWSRegisteredEventData*> registered_events;
-int Lua_Connect(lua_State* L) {
+int EWS_EventHandler_Connect(lua_State* L) {
   auto wxobject = get_ews_object_from_top<Component>(L, 1);
 
-  auto id = lua_tostring(L, 2);
-  auto event_name = lua_tostring(L, 3);
+  const char* id = nullptr;
+  const char* event_name = nullptr;
+  int ref = 0;
+  void* extra_data = nullptr;
+
+  if (lua_type(L, 3) == LUA_TSTRING) {
+    id = lua_tostring(L, 2);
+    event_name = lua_tostring(L, 3);
+    
+    lua_pushvalue(L, 4);
+    ref = luaL_ref(L, LUA_REGISTRYINDEX);
+  }
+  else {
+    id = "";
+    event_name = lua_tostring(L, 2);
+    lua_pushvalue(L, 3);
+    ref = luaL_ref(L, LUA_REGISTRYINDEX);
+
+
+  }
 
   //lua_pop(L, 4);
 
-  int ref = luaL_ref(L, LUA_REGISTRYINDEX);
   //auto eventdata = new RegisteredEventData{ L, wxobject, ref };
   //
   //wxobject->internal_object->Bind(wxEVT_CLOSE_WINDOW, EWS_EVT_CLOSE_WINDOW, -1, -1, (wxObject*)eventdata);
@@ -154,8 +171,4 @@ if(!strcmp(event_name, #diesel_event_type)) \
   DECLARE_EVENT_BIND(EVT_KEY_DOWN)
 
   return 0;
-}
-
-void Register_EventHandling_Functions(lua_State* L) {
-  lua_register(L, "EWS_EventHandler_Connect", Lua_Connect);
 }

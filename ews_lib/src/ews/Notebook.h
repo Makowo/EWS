@@ -7,8 +7,9 @@
 #include "ews_utils.h"
 
 class Notebook : Window {
-  public:
-  static void Add_Notebook_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(Notebook);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);

@@ -1,17 +1,17 @@
 
 #include "ToggleButton.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_ToggleButton_SetValue", ToggleButton::Lua_SetValue},
-  {"EWS_ToggleButton_GetValue", ToggleButton::Lua_GetValue}
-};
-
-ADD_FUNCS_AUTOFILL(ToggleButton::Add_ToggleButton_Funcs)
+void ToggleButton::AddLuaFunctions(lua_State* L)
+{
+  AnyButton::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(ToggleButton::Lua_SetValue, "set_value");
+  REGISTER_LUA_CLASS_FUNCTION(ToggleButton::Lua_GetValue, "get_value");
+}
 
 int ToggleButton::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto label = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto label = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
 
   auto id = "";
 

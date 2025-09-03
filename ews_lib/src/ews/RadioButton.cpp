@@ -1,16 +1,18 @@
 
 #include "RadioButton.h"
 
-static const std::vector<luaL_Reg> methods = {
-};
+void RadioButton::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
 
-ADD_FUNCS_AUTOFILL(RadioButton::Add_RadioButton_Funcs)
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_value");
+}
 
 int RadioButton::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto name = lua_tostring(L, 2);
-  auto group = lua_tostring(L, 3);
-  auto style = lua_tostring(L, 4);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto name = lua_tostring(L, 3);
+  auto group = lua_tostring(L, 4);
+  auto style = lua_tostring(L, 5);
 
   auto radiobutton = create_new_ews_object<RadioButton>(L);
 

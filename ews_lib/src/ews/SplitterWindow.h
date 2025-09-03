@@ -5,8 +5,9 @@
 #include "Window.h"
 
 class SplitterWindow : public Window {
-  public:
-  static void Add_SplitterWindow_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(SplitterWindow);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);

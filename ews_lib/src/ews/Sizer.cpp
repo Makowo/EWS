@@ -1,14 +1,30 @@
 #include "Sizer.h"
 #include "Window.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_Sizer_Add_WindowObj", Sizer::Lua_Add_WindowObj},
-  {"EWS_Sizer_Add_SizerObj", Sizer::Lua_Add_SizerObj},
-  {"EWS_Sizer_AddStretchSpacer", Sizer::Lua_AddStrechSpacer},
-};
+void Sizer::AddLuaFunctions(lua_State* L)
+{
+  Component::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(Sizer::Lua_Add, "add");
+  REGISTER_LUA_CLASS_FUNCTION(Sizer::Lua_AddSpacer, "add_spacer");
+  REGISTER_LUA_CLASS_FUNCTION(Sizer::Lua_AddStretchSpacer, "add_stretch_spacer");
+}
 
-ADD_FUNCS_AUTOFILL(Sizer::Add_Sizer_Funcs)
+int Sizer::Lua_Add(lua_State* L)
+{
+  Component* to_add = get_ews_object_from_top<Component>(L, 2);
 
+  if (!to_add)
+    return 0;
+
+  if (dynamic_cast<Sizer*>(to_add) != nullptr) {
+    return Lua_Add_SizerObj(L);
+  }
+  else {
+    return Lua_Add_WindowObj(L);
+  }
+
+  return 0;
+}
 int Sizer::Lua_Add_WindowObj(lua_State* L) {
   Sizer* sizer = get_ews_object_from_top<Sizer>(L, 1);
   Window* to_add = get_ews_object_from_top<Window>(L, 2);
@@ -46,7 +62,11 @@ int Sizer::Lua_Add_SizerObj(lua_State *L)
   return 0;
 }
 
-int Sizer::Lua_AddStrechSpacer(lua_State* L) {
+int Sizer::Lua_AddSpacer(lua_State* L)
+{
+  return 0;
+}
+int Sizer::Lua_AddStretchSpacer(lua_State* L) {
   auto sizer = get_ews_object_from_top<Sizer>(L, 1);
   auto prop = lua_tonumber(L, 2);
 

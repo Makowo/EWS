@@ -1,19 +1,19 @@
 #include "ProgressDialog.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_ProgressDialog_UpdateBar", ProgressDialog::Lua_UpdateBar}
-};
-
-ADD_FUNCS_AUTOFILL(ProgressDialog::Add_ProgressDialog_Funcs)
+void ProgressDialog::AddLuaFunctions(lua_State* L)
+{
+  Dialog::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(ProgressDialog::Lua_UpdateBar, "update_bar");
+}
 
 int ProgressDialog::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
 
-  auto title = lua_tostring(L, 2);
-  auto message = lua_tostring(L, 3);
+  auto title = lua_tostring(L, 3);
+  auto message = lua_tostring(L, 4);
 
-  auto maximum = lua_tonumber(L, 4);
-  auto style = lua_tostring(L, 5);
+  auto maximum = lua_tonumber(L, 5);
+  auto style = lua_tostring(L, 6);
 
 #define AHHHHHHHHHHHHHHHHH(a) std::cout << "[ProgressDialog] " #a  " " << a << std::endl;
   //AHHHHHHHHHHHHHHHHH(parent)

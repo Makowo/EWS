@@ -1,15 +1,15 @@
 
 #include "BitmapButton.h"
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(BitmapButton::Add_BitmapButton_Funcs)
+void BitmapButton::AddLuaFunctions(lua_State* L)
+{
+  Button::AddLuaFunctions(L);
+}
 
 int BitmapButton::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto image_path = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto image_path = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
 
   DISABLE_IMAGE_LOAD_WARNING
 

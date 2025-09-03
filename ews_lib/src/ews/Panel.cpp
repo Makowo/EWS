@@ -4,20 +4,20 @@
 
 #include "EventHandler.h"
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(Panel::Add_Panel_Funcs)
+void Panel::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+}
 
 int Panel::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
   auto id = std::string("");
   auto style = std::string("");
 
-  if(lua_type(L, 2) == LUA_TSTRING)
-    id = lua_tostring(L, 2);
-  if (lua_type(L, 3) == LUA_TSTRING)
-    style = lua_tostring(L, 3);
+  if(lua_type(L, 3) == LUA_TSTRING)
+    id = lua_tostring(L, 3);
+  if (lua_type(L, 4) == LUA_TSTRING)
+    style = lua_tostring(L, 4);
 
   auto panel = create_new_ews_object<Panel>(L);
 
