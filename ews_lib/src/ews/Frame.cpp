@@ -109,8 +109,11 @@ void Frame::init(std::string name, Vector3* start_pos, Vector3* size, std::strin
   if (name == "World Editor") {
     wxTheApp->SetTopWindow(this->get_internal_object_type<wxFrame>());
     this->get_internal_object_type<wxFrame>()->Bind(wxEVT_ACTIVATE, [this](wxActivateEvent& evt) {
-      get_dsl_window_from_hwnd(real_raid_window)->_activate_state = evt.GetActive();
-      get_dsl_window_from_hwnd(real_raid_window)->_activation_altered = true;
+
+      if (get_dsl_window_from_hwnd(real_raid_window)) {
+        get_dsl_window_from_hwnd(real_raid_window)->_activate_state = evt.GetActive();
+        get_dsl_window_from_hwnd(real_raid_window)->_activation_altered = true;
+      }
       evt.Skip();
       });
   }

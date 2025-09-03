@@ -14,6 +14,8 @@ includes("wxWidgetsPackage.lua")
 
 includes("Dependencies/HashlistLib/xmake.lua")
 
+includes("../DieselEngineExplorer/dieselformats")
+
 
 local arch = "x86"
 
@@ -65,20 +67,26 @@ target("EWS-"..game)
   add_deps("HashlistLib")
 
   if game == "RAIDWW2" then
-    add_files("./game_cpp/raidww2/src/main.cpp")
+    add_files("./game_cpp/raidww2/src/*.cpp")
+    add_headerfiles("./game_cpp/raidww2/src/*.h")
+    add_includedirs("./game_cpp/raidww2/src")
     add_deps("game_lua_raid")
     add_defines("WIN64")
     add_wxwidgets("x64")
     set_arch("x64")
   end
   if game == "PDTH" then
-    add_files("./game_cpp/pdth/src/main.cpp")
+    add_files("./game_cpp/pdth/src/*.cpp")
+    add_headerfiles("./game_cpp/pdth/src/*.h")
+    add_includedirs("./game_cpp/pdth/src")
     add_deps("game_lua_pdth")
     add_wxwidgets("x86")
     set_arch("x86")
   end
   if game == "PD2" then
-    add_files("./game_cpp/pd2/src/main.cpp")
+    add_files("./game_cpp/pd2/src/*.cpp")
+    add_headerfiles("./game_cpp/pd2/src/*.h")
+    add_includedirs("./game_cpp/pd2/src")
     add_deps("game_lua_pd2")
     add_wxwidgets("x86")
     set_arch("x86")

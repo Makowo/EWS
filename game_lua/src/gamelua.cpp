@@ -45,6 +45,9 @@ EXPORT_API void lua_pushnumber(lua_State *L, lua_Number n) {
 EXPORT_API void lua_pushvalue(lua_State* L, int idx) {
   return funcptr_lua_pushvalue(L, idx);
 }
+EXPORT_API int luaL_loadstring(lua_State* L, const char* s) {
+  return funcptr_luaL_loadstring(L, s);
+}
 
 static void *l_alloc(void *ud, void *ptr, size_t osize, size_t nsize)
 {

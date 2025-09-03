@@ -48,8 +48,9 @@
 #include "ews/ToggleButton.h"
 #include "ews/BitmapButton.h"
 #include "ews/SpinButton.h"
+#include "ews/RadioButton.h"
 
-#include "./rendering.h"
+#include "rendering.h"
 
 #include <filesystem>
 
@@ -85,6 +86,7 @@ static const std::vector<luaL_Reg> EWS_methods = {
   {"EWS_New_TreeCtrl", TreeCtrl::Lua_Create},
   {"EWS_New_Slider", Slider::Lua_Create},
   {"EWS_New_SpinButton", SpinButton::Lua_Create},
+  {"EWS_New_RadioButton", RadioButton::Lua_Create},
 };
 
 int EWS_Lua_GetDataFolder(lua_State* L) {

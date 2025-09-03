@@ -459,8 +459,8 @@ BOOL __stdcall DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved) {
 
   
   if(reason == DLL_PROCESS_ATTACH) {
-    AllocConsole();
-    freopen("CONOUT$", "w", stdout);
+    if (AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole())
+      freopen("CONOUT$", "w", stdout);
     MINHOOK_ERROR_CHECKING("Failed to initialise MinHook:", MH_Initialize());
 
     MultiFileTransportTesting();

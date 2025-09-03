@@ -12,6 +12,76 @@ typedef short int16_t;
 typedef int int32_t;
 typedef long long int64_t;*/
 
+
+#ifndef EWS_USE_LUAJIT
+
+#define LUA_MULTRET (-1)
+
+#define LUA_REGISTRYINDEX	(-10000)
+#define LUA_ENVIRONINDEX	(-10001)
+#define LUA_GLOBALSINDEX	(-10002)
+#define lua_upvalueindex(i)	(LUA_GLOBALSINDEX-(i))
+
+#define LUA_YIELD	1
+#define LUA_ERRRUN	2
+#define LUA_ERRSYNTAX	3
+#define LUA_ERRMEM	4
+#define LUA_ERRERR	5
+
+struct lua_TValue {};
+
+typedef lua_TValue* StkId;
+
+struct lua_State {
+  char PAD[8];
+  StkId top;
+  StkId base;
+};
+
+typedef int (*lua_CFunction)(lua_State* L);
+
+typedef const char* (*lua_Reader)(lua_State* L, void* ud, size_t* sz);
+
+typedef void* (*lua_Alloc)(void* ud, void* ptr, size_t osize, size_t nsize);
+
+#define LUA_TNONE (-1)
+#define LUA_TNIL 0
+#define LUA_TBOOLEAN 1
+#define LUA_TLIGHTUSERDATA 2
+#define LUA_TNUMBER 3
+#define LUA_TSTRING 4
+#define LUA_TTABLE 5
+#define LUA_TFUNCTION 6
+#define LUA_TUSERDATA 7
+#define LUA_TTHREAD 8
+
+typedef double lua_Number;
+typedef ptrdiff_t lua_Integer;
+
+typedef struct luaL_Reg {
+  const char* name;
+  lua_CFunction func;
+} luaL_Reg;
+
+#define lua_pop(L,n) lua_settop(L, -(n)-1)
+
+#define lua_register(L,n,f) (lua_pushcfunction(L, (f)), lua_setglobal(L, (n)))
+#define lua_pushcfunction(L, f) lua_pushcclosure(L, (f), 0)
+
+#define lua_setglobal(L, s) lua_setfield(L, LUA_GLOBALSINDEX, (s))
+#define lua_getglobal(L, s) lua_getfield(L, LUA_GLOBALSINDEX, (s))
+
+#define lua_tostring(L, i) lua_tolstring(L, (i), NULL)
+
+#define luaL_dofile(L, fn) (luaL_loadfile(L, fn) || lua_pcall(L, 0, 0, 0))
+#define luaL_dostring(L, s) (luaL_loadstring(L, s) || lua_pcall(L, 0, 0, 0))
+
+#define luaL_getmetatable(L, n) (lua_getfield(L, LUA_REGISTRYINDEX, (n)))
+
+#endif
+
+#ifdef EWS_USE_LUAJIT
+
 #define LUAJIT_LE	0
 #define LUAJIT_BE	1
 
@@ -348,3 +418,5 @@ typedef union GCobj {
   GCtab tab;
   GCudata ud;
 } GCobj;
+
+#endif

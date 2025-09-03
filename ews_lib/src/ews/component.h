@@ -12,6 +12,8 @@
 
 #define OBJECT_CONVERSION_TYPE_VERIFICATION OBJECT_CONVERSION_TYPE_VERIFICATION_ON_SET
 
+int EWS_Component_GarbageCollection(lua_State* L);
+
 class Component {
   public:
     virtual ~Component();

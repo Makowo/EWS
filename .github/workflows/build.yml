@@ -32,6 +32,10 @@ jobs:
         if: steps.restore-wxwidgets.outputs.cache-hit != 'true'
         run: python "./scripts/buildwxwidgets.py" x64
 
+      - name: Build wxWidgets x86
+        if: steps.restore-wxwidgets.outputs.cache-hit != 'true'
+        run: python "./scripts/buildwxwidgets.py" x86
+
 
       - name: "Save wxWidgets to cache"
         id: cache-wxwidgets
@@ -49,16 +53,36 @@ jobs:
         run: xmake build -y EWS-RAIDWW2
 
         # Build last for it's respective platforms, as they will attempt to link to it's .lib file
-      - name: "Build VERSION proxy"
+      - name: "Build VERSION proxy (x64)"
+        run: xmake build -y VERSION
+
+      - name: "Create build files for 32bit engine targets"
+        run: xmake config -a x86 -y
+
+      - name: "Build for PAYDAY: The Heist"
+        run: xmake build -y EWS-PDTH
+
+        # Build last for it's respective platforms, as they will attempt to link to it's .lib file
+      - name: "Build VERSION proxy (x86)"
         run: xmake build -y VERSION
 
       - name: "Stage RAID: World War II build files"
         run: python "./scripts/packagestaging.py" raidww2 x64
+
+      - name: "Stage PAYDAY: The Heist build files"
+        run: python "./scripts/packagestaging.py" pdth x86
 
       - name: "Upload RAID: World War II artifact"
         uses: actions/upload-artifact@v4
         with:
           name: "EWS-RAIDWW2"
           path: staging/raidww2
+          if-no-files-found: error
+
+      - name: "Upload RAID: PAYDAY: The Heist artifact"
+        uses: actions/upload-artifact@v4
+        with:
+          name: "EWS-PDTH"
+          path: staging/pdth
           if-no-files-found: error
       
