@@ -1,72 +1,14 @@
 #include "diesel.h"
 
-
-void mvector(lua_State *L)
-{
-  #ifndef GAME
-  lua_createtable(L, 0, 0);
-  lua_pushvalue(L, -1);
-  lua_setglobal(L, "mvector3");
-  lua_pushcclosure(L, mvector::x, 0);
-  lua_setfield(L, -2, "x");
-  lua_pushcclosure(L, mvector::y, 0);
-  lua_setfield(L, -2, "y");
-  lua_pushcclosure(L, mvector::z, 0);
-  lua_setfield(L, -2, "z");
-  #endif
+namespace dsl {
+  decltype(dsl::push_lua_Vector3) push_lua_Vector3 = nullptr;
 }
 
-int vec3(lua_State *L)
+void dsl::init_push_lua_functions(SignatureScannerFunction scanner)
 {
-  #ifndef GAME
-  if (lua_gettop(L) == 0)
-  {
-    Vector3 *vec = (Vector3 *)lua_newuserdata(L, sizeof(Vector3));
-    return 1;
-  }
-  if (lua_gettop(L) == 3)
-  {
-    float x = lua_tointeger(L, 1);
-    float y = lua_tointeger(L, 2);
-    float z = lua_tointeger(L, 3);
-    Vector3 *vec = (Vector3 *)lua_newuserdata(L, sizeof(Vector3));
-    vec->x = x;
-    vec->y = y;
-    vec->z = z;
-    return 1;
-  }
-  #else
-  return 0;
-  #endif
-}
-
-int mvector::x(lua_State *L)
-{
-  #ifndef GAME
-  Vector3 *vec = (Vector3 *)lua_touserdata(L, 1);
-  lua_pushnumber(L, vec->x);
-  return 1;
-  #else
-  return 0;
-  #endif
-}
-int mvector::y(lua_State *L)
-{
-  #ifndef GAME
-  Vector3 *vec = (Vector3 *)lua_touserdata(L, 1);
-  lua_pushnumber(L, vec->y);
-  return 1;
-  #else
-  return 0;
-  #endif
-}
-int mvector::z(lua_State *L)
-{
-  #ifndef GAME
-  Vector3 *vec = (Vector3 *)lua_touserdata(L, 1);
-  lua_pushnumber(L, vec->z);
-  return 1;
-  #else
-  return 0;
-  #endif
+#if GAME_RAIDWW2
+  dsl::push_lua_Vector3 = (decltype(dsl::push_lua_Vector3))scanner("raid_win64_release.exe", "push_lua_Vector3", "\x48\x83\xEC\x00\xF3\x0F\x10\x02\xF3\x0F\x11\x44\x24", "xxx?xxxxxxxxx");
+#else
+#error Missing signature for dsl::push_lua<Vector3>
+#endif
 }

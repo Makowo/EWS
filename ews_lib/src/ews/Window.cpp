@@ -127,11 +127,9 @@ int Window::Lua_SetSize(lua_State* L) {
 int Window::Lua_GetSize(lua_State* L) {
   auto window = get_ews_object_from_top<Window>(L, 1);
 
-  lua_createtable(L, 0, 0);
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetSize().x);
-  lua_setfield(L, -2, "x");
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetSize().y);
-  lua_setfield(L, -2, "y");
+  wxSize size = window->get_internal_object_type<wxWindow>()->GetSize();
+
+  dsl::push_lua_Vector3(L, Vector3(size.x, size.y, 0));
 
   return 1;
 }
@@ -149,10 +147,11 @@ int Window::Lua_SetMinSize(lua_State* L) {
 int Window::Lua_GetMinSize(lua_State* L) {
   auto window = get_ews_object_from_top<Window>(L, 1);
 
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetMinSize().x);
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetMinSize().y);
+  wxSize minSize = window->get_internal_object_type<wxWindow>()->GetMinSize();
 
-  return 2;
+  dsl::push_lua_Vector3(L, Vector3(minSize.x, minSize.y, 0));
+
+  return 1;
 }
 
 int Window::Lua_SetMaxSize(lua_State* L) {

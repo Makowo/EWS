@@ -6,6 +6,7 @@ target("game_lua_raid")
 
   add_defines("WIN64")
   
+  add_defines("GAME_RAIDWW2=1")
   add_headerfiles("./include/*.h")
   add_includedirs("./include")
 
@@ -18,8 +19,8 @@ target("game_lua_pdth")
   add_files("./src/gamelua.cpp")
   add_files("./src/pdth.cpp")
 
+  add_defines("GAME_PDTH=1")
   add_headerfiles("./include/*.h")
-
   add_includedirs("./include")
 
   set_symbols("debug")
@@ -31,6 +32,7 @@ target("game_lua_pd2")
   add_files("./src/gamelua.cpp")
   add_files("./src/pd2.cpp")
   
+  add_defines("GAME_PD2=1")
   add_headerfiles("./include/*.h")
   add_includedirs("./include")
 

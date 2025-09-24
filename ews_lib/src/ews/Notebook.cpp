@@ -9,7 +9,7 @@ void Notebook::AddLuaFunctions(lua_State* L)
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_Add_Page, "add_page");
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetPageCount, "get_page_count");
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_SetPageText, "set_page_text");
-  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetPageText, "get_page_Text");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetPageText, "get_page_text");
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_Fit, "fit");
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_SetPage, "set_page");
   REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetCurrentPage, "get_current_page");

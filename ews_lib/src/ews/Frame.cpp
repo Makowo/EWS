@@ -22,14 +22,10 @@ int Frame::Lua_Create(lua_State *L)
   auto name = std::string(lua_tostring(L, 2));
   //std::cout << "[Frame::Lua_Create] name" << std::endl;
   //auto start_pos = get_vec3_from_arg(L, 3);
-  auto start_pos = Vector3();
-  start_pos.x = 0;
-  start_pos.y = 0;
+  auto start_pos = Vector3(0, 0, 0);
   //std::cout << "[Frame::Lua_Create] startpos: x: " << start_pos->x << " y: " << start_pos->y << " z: " << start_pos->z << std::endl;
   //auto size = get_vec3_from_arg(L, 4);
-  auto size = Vector3();
-  size.x = 0;
-  size.y = 0;
+  auto size = Vector3(0, 0, 0);
   //std::cout << "[Frame::Lua_Create] size: x: " << start_pos->x << " y: " << start_pos->y << " z: " << start_pos->z << std::endl;
   auto style = std::string(lua_tostring(L, 5));
   //std::cout << "[Frame::Lua_Create] style" << std::endl;

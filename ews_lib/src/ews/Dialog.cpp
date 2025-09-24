@@ -3,7 +3,7 @@
 void Dialog::AddLuaFunctions(lua_State* L)
 {
   Window::AddLuaFunctions(L);
-  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_ShowModal, "show_model");
+  REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_ShowModal, "show_modal");
   REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_EndModal, "end_modal");
   REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_SetIcon, "set_icon");
   REGISTER_LUA_CLASS_FUNCTION(Dialog::Lua_Visible, "visible");

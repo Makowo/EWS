@@ -66,6 +66,7 @@ target("EWS-"..game)
   add_includedirs(path.join(os.projectdir(), "Dependencies/HashlistLib/include"))
   add_deps("HashlistLib")
 
+  add_defines("GAME_" .. game .. "=1")
   if game == "RAIDWW2" then
     add_files("./game_cpp/raidww2/src/*.cpp")
     add_headerfiles("./game_cpp/raidww2/src/*.h")
@@ -91,6 +92,8 @@ target("EWS-"..game)
     add_wxwidgets("x86")
     set_arch("x86")
   end
+
+  add_defines("NOMINMAX", "WIN32_LEAN_AND_MEAN")
 
   add_files("./Dependencies/wxWidgets/include/wx/msw/wx.rc")
   add_includedirs(path.join(os.projectdir(), "game_lua/include"))

@@ -54,7 +54,13 @@
 
 #include <filesystem>
 
+#include <shellapi.h>
+
 int EWS_Lua_SystemFileExists(lua_State* L);
+int EWS_Lua_LaunchURL(lua_State* L);
+int EWS_Lua_MessageBox(lua_State* L);
+int EWS_Lua_NameToKeyCode(lua_State* L);
+int EWS_Lua_GetTextFromUser(lua_State* L);
 
 static const std::vector<luaL_Reg> EWS_methods = {
   {"Frame", Frame::Lua_Create},
@@ -89,19 +95,11 @@ static const std::vector<luaL_Reg> EWS_methods = {
   {"RadioButton", RadioButton::Lua_Create},
 
   {"system_file_exists", EWS_Lua_SystemFileExists},
+  {"launch_url", EWS_Lua_LaunchURL},
+  {"message_box", EWS_Lua_MessageBox},
+  {"name_to_key_code", EWS_Lua_NameToKeyCode},
+  {"get_text_from_user", EWS_Lua_GetTextFromUser}
 };
-
-int EWS_Lua_GetDataFolder(lua_State* L) {
-  //#ifndef GAME
-  lua_pushstring(L, "X:/Projects/EWS/ews_lib/lua_scripts/ews");
-  /*#else
-  char folder[MAX_PATH];
-  getcwd(folder, MAX_PATH);
-  std::cout << "CWD: " << folder << std::endl;
-  lua_pushstring(L, folder);
-  #endif*/
-  return 1;
-}
 
 int EWS_Lua_SystemFileExists(lua_State* L) {
   auto path = lua_tostring(L, 1);
@@ -142,17 +140,6 @@ int EWS_Lua_SetEWSWindow(lua_State* L) {
   auto appwindow = get_ews_object_from_top<AppWindow>(L, 1);
 
   set_appwindow(appwindow);
-
-  return 0;
-}
-
-int EWS_Lua_Delete_Object(lua_State* L) {
-  if (lua_type(L, 1) != LUA_TUSERDATA)
-    return 0;
-  auto obj = get_ews_object_from_top<Component>(L, 1);
-
-  if (obj && obj->get_internal_object_type<wxObject>())
-    delete obj->get_internal_object_type<wxObject>();
 
   return 0;
 }
@@ -201,6 +188,47 @@ int EWS_Lua_LaunchURL(lua_State* L) {
   return 0;
 }
 
+int EWS_Lua_MessageBox(lua_State* L) {
+  // parent
+  // message
+  // caption
+  // style
+  // start_pos
+
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  const char* message = lua_tostring(L, 3);
+  const char* caption = lua_tostring(L, 4);
+  const char* style = lua_tostring(L, 5);
+  Vector3* position = get_vec3_from_arg(L, 6);
+
+
+  int code = wxMessageBox(message, caption, get_style_from_merged_list(style), parent->get_internal_object_type<wxWindow>(), position->x, position->y);
+
+  int returnargs = 0;
+
+  if (code == wxCANCEL) {
+    lua_pushstring(L, "CANCEL");
+    returnargs++;
+  }
+  else if (code == wxNO) {
+    lua_pushstring(L, "NO");
+    returnargs++;
+  }
+  else if (code == wxYES) {
+    lua_pushstring(L, "YES");
+    returnargs++;
+  }
+
+  return returnargs;
+}
+int EWS_Lua_NameToKeyCode(lua_State* L) {
+  const char* name = lua_tostring(L, 2);
+
+  lua_pushnumber(L, 0);
+
+  return 1;
+}
+
 void EWS::add_members(lua_State* L) {
   lua_pushlightuserdata(L, nullptr);
   lua_createtable(L, 0, 0);
@@ -232,13 +260,7 @@ void EWS::add_members(lua_State* L) {
 
   lua_register(L, "EWS_EWSModExistsCookie", EWS_EWSModExistsCookie);
 
-  lua_register(L, "EWS_Lua_GetDataFolder", EWS_Lua_GetDataFolder);
-  lua_register(L, "EWS_Lua_SystemFileExists", EWS_Lua_SystemFileExists);
-  lua_register(L, "EWS_Lua_GetTextFromUser", EWS_Lua_GetTextFromUser);
-  lua_register(L, "EWS_Lua_LaunchURL", EWS_Lua_LaunchURL);
-
   lua_register(L, "EWS_SetEWSWindow", EWS_Lua_SetEWSWindow);
-  lua_register(L, "EWS_Delete_Object", EWS_Lua_Delete_Object);
 
   lua_register(L, "EWS_AddStringToHashlist", EWS_AddStringToHashlist);
 

@@ -12,6 +12,10 @@ typedef short int16_t;
 typedef int int32_t;
 typedef long long int64_t;*/
 
+#if defined(GAME_RAIDWW2) || defined(GAME_PD2)
+#define EWS_USE_LUAJIT
+#endif
+
 
 #ifndef EWS_USE_LUAJIT
 

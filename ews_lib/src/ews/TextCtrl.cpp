@@ -15,6 +15,8 @@ int TextCtrl::Lua_Create(lua_State* L) {
   auto text = lua_tostring(L, 3);
   auto style = lua_tostring(L, 4);
 
+  style = (style ? style : "");
+
   auto textctrl = create_new_ews_object<TextCtrl>(L);
 
   textctrl->init(parent, text, style);
