@@ -2,44 +2,59 @@
 
 #include "Sizer.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_Window_Set_Sizer", Window::Lua_Set_Sizer},
-  {"EWS_Window_Set_Visible", Window::Lua_Set_Visible},
+void Window::AddLuaFunctions(lua_State* L)
+{
+  Component::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Set_Sizer, "set_sizer");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Set_Visible, "set_visible");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Layout, "layout");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Update, "update");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Refresh, "refresh");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Fit, "fit");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_FitInside, "fit_inside");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_SetSize, "set_size");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_GetSize, "get_size");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_SetMinSize, "set_min_size");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_GetMinSize, "get_min_size");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_SetMaxSize, "set_max_size");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Destroy, "destroy");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_DestroyChildren, "destroy_children");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Freeze, "freeze");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Thaw, "thaw");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_SetEnabled, "set_enabled");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_Enabled, "enabled");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_SetFocus, "set_focus");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_InFocus, "in_focus");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_GetPosition, "get_position");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_TopLevelWindow_SetTitle, "set_title");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_TopLevelWindow_IsActive, "is_active");
+  REGISTER_LUA_CLASS_FUNCTION(Window::Lua_TopLevelWindow_IsMaximized, "is_maximized");
 
-  {"EWS_Window_Layout", Window::Lua_Layout},
-  {"EWS_Window_Update", Window::Lua_Update},
-  {"EWS_Window_Refresh", Window::Lua_Refresh},
+  
 
-  {"EWS_Window_Fit", Window::Lua_Fit},
-  {"EWS_Window_FitInside", Window::Lua_FitInside},
-
-  {"EWS_Window_SetSize", Window::Lua_SetSize},
-  {"EWS_Window_GetSize", Window::Lua_GetSize},
-
-  {"EWS_Window_SetMinSize", Window::Lua_SetMinSize},
-  {"EWS_Window_GetMinSize", Window::Lua_GetMinSize},
-
-  {"EWS_Window_SetMaxSize", Window::Lua_SetMaxSize},
-
-  {"EWS_Window_Destroy", Window::Lua_Destroy},
-  {"EWS_Window_DestroyChildren", Window::Lua_DestroyChildren},
-  {"EWS_Window_Freeze", Window::Lua_Freeze},
-  {"EWS_Window_Thaw", Window::Lua_Thaw},
-
-  {"EWS_Window_SetEnabled", Window::Lua_SetEnabled},
-  {"EWS_Window_Enabled", Window::Lua_Enabled},
-
-  {"EWS_Window_SetFocus", Window::Lua_SetFocus},
-  {"EWS_Window_InFocus", Window::Lua_InFocus},
-
-  {"EWS_Window_GetPosition", Window::Lua_GetPosition},
-
-  {"EWS_TopLevelWindow_SetTitle", Window::Lua_TopLevelWindow_SetTitle},
-  {"EWS_TopLevelWindow_IsActive", Window::Lua_TopLevelWindow_IsActive},
-  {"EWS_TopLevelWindow_IsMaximized", Window::Lua_TopLevelWindow_IsMaximized},
-};
-
-ADD_FUNCS_AUTOFILL(Window::Add_Window_Funcs)
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_background_colour");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "get_best_size");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "get_effective_min_size");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_position");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "center");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_size");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_family");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_style");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_weight");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_underline");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_font_face");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_size");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_family");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_style");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_weight");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_underline");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_own_font_face");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_tool_tip");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "popup_menu");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_virtual_size");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "set_virtual_size_hints");
+  REGISTER_LUA_CLASS_FUNCTION(do_nothing, "toggle_style");
+}
 
 int Window::Lua_Set_Sizer(lua_State *L) {
   auto window = get_ews_object_from_top<Window>(L, 1);
@@ -112,10 +127,11 @@ int Window::Lua_SetSize(lua_State* L) {
 int Window::Lua_GetSize(lua_State* L) {
   auto window = get_ews_object_from_top<Window>(L, 1);
 
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetSize().x);
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetSize().y);
+  wxSize size = window->get_internal_object_type<wxWindow>()->GetSize();
 
-  return 2;
+  dsl::push_lua_Vector3(L, Vector3(size.x, size.y, 0));
+
+  return 1;
 }
 
 int Window::Lua_SetMinSize(lua_State* L) {
@@ -131,10 +147,11 @@ int Window::Lua_SetMinSize(lua_State* L) {
 int Window::Lua_GetMinSize(lua_State* L) {
   auto window = get_ews_object_from_top<Window>(L, 1);
 
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetMinSize().x);
-  lua_pushnumber(L, window->get_internal_object_type<wxWindow>()->GetMinSize().y);
+  wxSize minSize = window->get_internal_object_type<wxWindow>()->GetMinSize();
 
-  return 2;
+  dsl::push_lua_Vector3(L, Vector3(minSize.x, minSize.y, 0));
+
+  return 1;
 }
 
 int Window::Lua_SetMaxSize(lua_State* L) {

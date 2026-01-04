@@ -5,4 +5,4 @@
 int get_winid_from_string(const char* str);
 int get_winid_from_string(const std::string& str);
 
-void Register_EventHandling_Functions(lua_State* L);
+int EWS_EventHandler_Connect(lua_State* L);

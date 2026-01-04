@@ -1,12 +1,11 @@
 #pragma once
 
-#define METHODSLIST_METHOD(name, dest) {name, dest},
 #define TEXTENTRY_METHODS_LIST(clazz)\
-METHODSLIST_METHOD("EWS_" #clazz "_GetLastPosition", clazz##::Lua_GetLastPosition) \
-METHODSLIST_METHOD("EWS_" #clazz "_GetValue", clazz##::Lua_GetValue) \
-METHODSLIST_METHOD("EWS_" #clazz "_SetValue", clazz##::Lua_SetValue) \
-METHODSLIST_METHOD("EWS_" #clazz "_AppendText", clazz##::Lua_AppendText) \
-METHODSLIST_METHOD("EWS_" #clazz "_Clear", clazz##::Lua_Clear)
+REGISTER_LUA_CLASS_FUNCTION(clazz##::Lua_GetLastPosition, "get_last_position") \
+REGISTER_LUA_CLASS_FUNCTION(clazz##::Lua_GetValue, "get_value") \
+REGISTER_LUA_CLASS_FUNCTION(clazz##::Lua_SetValue, "set_value") \
+REGISTER_LUA_CLASS_FUNCTION(clazz##::Lua_AppendText, "append") \
+REGISTER_LUA_CLASS_FUNCTION(clazz##::Lua_Clear, "clear")
 
 #define TEXTENTRY_HEADER_FUNCS \
 static int Lua_GetLastPosition(lua_State* L);\

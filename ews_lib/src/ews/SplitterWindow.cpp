@@ -1,18 +1,17 @@
 #include "SplitterWindow.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_SplitterWindow_Split_Horizontally", SplitterWindow::Lua_SplitHorizontally},
-  {"EWS_SplitterWindow_Split_Vertically", SplitterWindow::Lua_SplitVertically},
-
-  {"EWS_SplitterWindow_SetMinimumPaneSize", SplitterWindow::Lua_SetMinimumPaneSize},
-};
-
-ADD_FUNCS_AUTOFILL(SplitterWindow::Add_SplitterWindow_Funcs)
+void SplitterWindow::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(SplitterWindow::Lua_SplitHorizontally, "split_horizontally");
+  REGISTER_LUA_CLASS_FUNCTION(SplitterWindow::Lua_SplitVertically, "split_vertically");
+  REGISTER_LUA_CLASS_FUNCTION(SplitterWindow::Lua_SetMinimumPaneSize, "set_minimum_pane_size");
+}
 
 int SplitterWindow::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  std::string name = lua_tostring(L, 2);
-  std::string style = lua_tostring(L, 3);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  std::string name = lua_tostring(L, 3);
+  std::string style = lua_tostring(L, 4);
 
   SplitterWindow* sw = create_new_ews_object<SplitterWindow>(L);
 

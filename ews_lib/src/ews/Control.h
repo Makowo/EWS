@@ -5,5 +5,6 @@
 #include <wx/wx.h>
 
 class Control : public Window {
-
+public:
+  static void AddLuaFunctions(lua_State* L);
 };

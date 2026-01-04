@@ -3,6 +3,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+#include <filesystem>
+
 static HMODULE ews_dll = nullptr;
 
 HMODULE version_dll;
@@ -75,6 +77,9 @@ void load_version()
   WRAPPER_FUNC(VerQueryValueA);
   WRAPPER_FUNC(VerQueryValueW);
 }
+
+#pragma comment(lib, "user32.lib")
+
 BOOL APIENTRY DllMain(HMODULE hmodule, DWORD reason, LPVOID reserved)
 {
   if (reason == DLL_PROCESS_ATTACH)
@@ -89,7 +94,15 @@ BOOL APIENTRY DllMain(HMODULE hmodule, DWORD reason, LPVOID reserved)
     // #endif
 
     // your payload goes here
-    ews_dll = LoadLibrary("EWS-RAIDWW2.dll");
+    //ews_dll = LoadLibrary("EWS-RAIDWW2.dll");
+    
+    //ews_dll = LoadLibrary("PDTHModOverrides.dll");
+
+    //return TRUE;
+
+    if (std::filesystem::exists("./EWS-RAIDWW2.dll")) ews_dll = LoadLibrary("EWS-RAIDWW2.dll");
+    else if (std::filesystem::exists("./EWS-PDTH.dll")) ews_dll = LoadLibrary("EWS-PDTH.dll");
+    else if (std::filesystem::exists("./EWS-PD2.dll")) ews_dll = LoadLibrary("EWS-PD2.dll");
     //if (GetFileAttributes("./EWS_RAIDWW2.dll") != INVALID_FILE_ATTRIBUTES && GetLastError() != ERROR_FILE_NOT_FOUND) {ews_dll = LoadLibrary("EWS_RAIDWW2.dll");} else
     //if (GetFileAttributes("./EWS_PDTH.dll") != INVALID_FILE_ATTRIBUTES && GetLastError() != ERROR_FILE_NOT_FOUND) { ews_dll = LoadLibrary("EWS_PDTH.dll"); } else
     //if (GetFileAttributes("./EWS_PD2.dll") != INVALID_FILE_ATTRIBUTES && GetLastError() != ERROR_FILE_NOT_FOUND) { ews_dll = LoadLibrary("EWS_PD2.dll"); }

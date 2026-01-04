@@ -34,8 +34,9 @@ private:
 };
 
 class AppWindow : public Window {
+  COMPONENT_CHILD_CLASS(AppWindow);
 public:
-  static void Add_AppWindow_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

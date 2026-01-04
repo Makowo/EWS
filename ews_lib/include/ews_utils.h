@@ -11,6 +11,7 @@
 #include <wx/colour.h>
 #include <wx/image.h>
 
+int do_nothing(lua_State* L);
 
 #if 1
 #define DISABLE_IMAGE_LOAD_WARNING wxLogNull stopImageLoadWarning;
@@ -27,6 +28,41 @@ template<typename T> T* get_ews_object_from_top(lua_State* L, int top) {
 template<typename T> T* create_new_ews_object(lua_State* L) {
   auto instance = (T*)lua_newuserdata(L, sizeof(T));
   new (instance) T();
+
+  bool exists = true;
+
+  lua_getglobal(L, "__classes");
+  lua_getfield(L, -1, T::EWSClassName);
+  if (lua_type(L, -1) != LUA_TTABLE) {
+    exists = false;
+    lua_pop(L, 2);
+  }
+
+
+  if (!exists) {
+    lua_createtable(L, 0, 0);
+
+    lua_getglobal(L, "__classes");
+    lua_pushvalue(L, -2);
+    lua_setfield(L, -2, T::EWSClassName);
+    lua_pop(L, 1);
+
+    T::AddLuaFunctions(L);
+
+    lua_pushvalue(L, -1);
+    lua_setfield(L, -2, "__index");
+
+    lua_setmetatable(L, -2);
+  }
+  else {
+    lua_setmetatable(L, -3);
+    lua_pop(L, 1);
+  }
+
+  if (lua_type(L, -1) != LUA_TUSERDATA || lua_touserdata(L, -1) == nullptr)
+    __debugbreak();
+
+
   return instance;
 }
 

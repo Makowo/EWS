@@ -200,15 +200,15 @@ function CoreSetup:__init()
 
   managers.editor:toggle()
 
-  PackageManager:load("world_init")
-  PackageManager:load("packages/zone_germany")
-  PackageManager:load("levels/vanilla/germany_camp/world")
+  --PackageManager:load("world_init")
+  --PackageManager:load("packages/zone_germany")
+  --PackageManager:load("levels/vanilla/germany_camp/world")
 
-  EWS_Log("PackageManager:loaded (world_init): " .. tostring(PackageManager:loaded(Idstring("world_init"))))
-  EWS_Log("PackageManager:loaded (packages/zone_germany): " .. tostring(PackageManager:loaded(Idstring("packages/zone_germany"))))
-  EWS_Log("PackageManager:loaded (levels/vanilla/germany_camp/world): " .. tostring(PackageManager:loaded(Idstring("levels/vanilla/germany_camp/world"))))
+  --EWS_Log("PackageManager:loaded (world_init): " .. tostring(PackageManager:loaded(Idstring("world_init"))))
+  --EWS_Log("PackageManager:loaded (packages/zone_germany): " .. tostring(PackageManager:loaded(Idstring("packages/zone_germany"))))
+  --EWS_Log("PackageManager:loaded (levels/vanilla/germany_camp/world): " .. tostring(PackageManager:loaded(Idstring("levels/vanilla/germany_camp/world"))))
 
-  EWS_Log("DB:has (levels/vanilla/germany_camp/world.world): " .. tostring(DB:has("world", "levels/vanilla/germany_camp/world")))
+  --EWS_Log("DB:has (levels/vanilla/germany_camp/world.world): " .. tostring(DB:has("world", "levels/vanilla/germany_camp/world")))
 
   --[[
 	managers.editor._world_holder = WorldHolder:new({

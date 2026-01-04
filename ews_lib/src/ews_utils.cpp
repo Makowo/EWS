@@ -8,6 +8,9 @@
 
 #include <filesystem>
 
+
+int do_nothing(lua_State* L) { return 0; }
+
 enum
 {
   wxRICHTEXT_FIELD_STYLE_COMPOSITE = 0x01,

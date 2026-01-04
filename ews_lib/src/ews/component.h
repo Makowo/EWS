@@ -12,9 +12,20 @@
 
 #define OBJECT_CONVERSION_TYPE_VERIFICATION OBJECT_CONVERSION_TYPE_VERIFICATION_ON_SET
 
+int EWS_Component_GarbageCollection(lua_State* L);
+
+// EWS class name format from https://github.com/steam-test1/Raid-WW2-Lua-Complete/blob/fc282f396ce9ce0d24b83c5562d5dfb3b1938f9e/core/lib/utils/dev/ews/coretableeditorpanel.lua#L228
+#define COMPONENT_CHILD_CLASS(name)\
+public:\
+inline static const char* ClassName = #name; \
+inline static const char* EWSClassName = "EWS" #name;
+#define REGISTER_LUA_CLASS_FUNCTION(cname, luaname) lua_pushcclosure(L, cname, 0); lua_setfield(L, -2, luaname);
+
 class Component {
   public:
     virtual ~Component();
+
+    static void AddLuaFunctions(lua_State* L);
 
 public:
     template<typename T>

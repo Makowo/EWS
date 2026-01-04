@@ -6,8 +6,9 @@
 #include <wx/progdlg.h>
 
 class ProgressDialog : public Dialog {
+  COMPONENT_CHILD_CLASS(ProgressDialog);
 public:
-  static void Add_ProgressDialog_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

@@ -6,39 +6,34 @@
 
 #include <rendering.h>
 
-static const std::vector<luaL_Reg> Frame_methods = {
-  {"EWS_Frame_Set_Icon", Frame::Lua_Set_Icon},
-  {"EWS_Frame_Set_MenuBar", Frame::Lua_Set_MenuBar},
-  {"EWS_Frame_Set_ToolBar", Frame::Lua_Set_ToolBar},
-
-  {"EWS_Frame_Set_StatusBar", Frame::Lua_Set_StatusBar},
-
-  {"EWS_Frame_IsIconized", Frame::Lua_IsIconized }
-};
-
-void Frame::Add_Frame_Funcs(lua_State* L)
+void Frame::AddLuaFunctions(lua_State* L)
 {
-  for (int i = 0; i < Frame_methods.size(); i++)
-  {
-    lua_register(L, Frame_methods[i].name, Frame_methods[i].func);
-  }
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(Frame::Lua_Set_Icon, "set_icon");
+  REGISTER_LUA_CLASS_FUNCTION(Frame::Lua_Set_MenuBar, "set_menu_bar");
+  REGISTER_LUA_CLASS_FUNCTION(Frame::Lua_Set_ToolBar, "set_tool_bar");
+  REGISTER_LUA_CLASS_FUNCTION(Frame::Lua_Set_StatusBar, "set_status_bar");
+  REGISTER_LUA_CLASS_FUNCTION(Frame::Lua_IsIconized, "is_iconized");
 }
+
 
 int Frame::Lua_Create(lua_State *L)
 {
-  auto name = std::string(lua_tostring(L, 1));
+  auto name = std::string(lua_tostring(L, 2));
   //std::cout << "[Frame::Lua_Create] name" << std::endl;
-  auto start_pos = get_vec3_from_arg(L, 2);
+  //auto start_pos = get_vec3_from_arg(L, 3);
+  auto start_pos = Vector3(0, 0, 0);
   //std::cout << "[Frame::Lua_Create] startpos: x: " << start_pos->x << " y: " << start_pos->y << " z: " << start_pos->z << std::endl;
-  auto size = get_vec3_from_arg(L, 3);
+  //auto size = get_vec3_from_arg(L, 4);
+  auto size = Vector3(0, 0, 0);
   //std::cout << "[Frame::Lua_Create] size: x: " << start_pos->x << " y: " << start_pos->y << " z: " << start_pos->z << std::endl;
-  auto style = std::string(lua_tostring(L, 4));
+  auto style = std::string(lua_tostring(L, 5));
   //std::cout << "[Frame::Lua_Create] style" << std::endl;
 
   auto parent = (Frame *)nullptr;
-  if (lua_type(L, 5) != LUA_TNIL)
+  if (lua_type(L, 6) != LUA_TNIL)
   {
-    parent = get_ews_object_from_top<Frame>(L, 5);
+    parent = get_ews_object_from_top<Frame>(L, 6);
   }
   //std::cout << "[Frame::Lua_Create] lua_type" << std::endl;
 
@@ -46,7 +41,7 @@ int Frame::Lua_Create(lua_State *L)
   //auto final_frame = new Frame();
   //std::cout << "[Frame::Lua_Create] lua_newuserdata: " << final_frame << std::endl;
 
-  final_frame->init(name, start_pos, size, style, parent);
+  final_frame->init(name, &start_pos, &size, style, parent);
   //std::cout << "[Frame::Lua_Create] init" << std::endl;
 
   return 1;
@@ -109,8 +104,11 @@ void Frame::init(std::string name, Vector3* start_pos, Vector3* size, std::strin
   if (name == "World Editor") {
     wxTheApp->SetTopWindow(this->get_internal_object_type<wxFrame>());
     this->get_internal_object_type<wxFrame>()->Bind(wxEVT_ACTIVATE, [this](wxActivateEvent& evt) {
-      get_dsl_window_from_hwnd(real_raid_window)->_activate_state = evt.GetActive();
-      get_dsl_window_from_hwnd(real_raid_window)->_activation_altered = true;
+
+      if (get_dsl_window_from_hwnd(real_raid_window)) {
+        get_dsl_window_from_hwnd(real_raid_window)->_activate_state = evt.GetActive();
+        get_dsl_window_from_hwnd(real_raid_window)->_activation_altered = true;
+      }
       evt.Skip();
       });
   }

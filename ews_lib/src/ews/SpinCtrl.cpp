@@ -1,17 +1,17 @@
 
 #include "SpinCtrl.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_SpinCtrl_SetValue", SpinCtrl::Lua_SetValue},
-  {"EWS_SpinCtrl_GetValue", SpinCtrl::Lua_GetValue},
-  {"EWS_SpinCtrl_SetRange", SpinCtrl::Lua_SetRange},
-};
-
-ADD_FUNCS_AUTOFILL(SpinCtrl::Add_SpinCtrl_Funcs)
+void SpinCtrl::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(SpinCtrl::Lua_SetValue, "set_value");
+  REGISTER_LUA_CLASS_FUNCTION(SpinCtrl::Lua_GetValue, "get_value");
+  REGISTER_LUA_CLASS_FUNCTION(SpinCtrl::Lua_SetRange, "set_range");
+}
 
 int SpinCtrl::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto style = lua_tostring(L, 2);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto style = lua_tostring(L, 3);
 
   auto spinctrl = create_new_ews_object<SpinCtrl>(L);
 

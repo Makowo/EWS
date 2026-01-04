@@ -3,19 +3,19 @@
 
 #include "./Window.h"
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(StaticBoxSizer::Add_StaticBoxSizer_Funcs)
+void StaticBoxSizer::AddLuaFunctions(lua_State* L)
+{
+  BoxSizer::AddLuaFunctions(L);
+}
 
 int StaticBoxSizer::Lua_Create(lua_State* L) {
-  auto win = get_ews_object_from_top<Window>(L, 1);
-  auto orient = lua_tostring(L, 2);
-  auto title = lua_tostring(L, 3);
+  auto win = get_ews_object_from_top<Window>(L, 2);
+  auto orient = lua_tostring(L, 3);
+  auto title = lua_tostring(L, 4);
 
   auto staticboxsizer = create_new_ews_object<StaticBoxSizer>(L);
 
-  staticboxsizer->init(win, orient, title);
+  staticboxsizer->init(win, orient, (title ? title : ""));
 
   return 1;
 }

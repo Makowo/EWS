@@ -9,8 +9,9 @@
 #include "Window.h"
 
 class Frame : public Window {
-  public:
-  static void Add_Frame_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(Frame);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

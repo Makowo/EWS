@@ -5,8 +5,9 @@
 #include "Window.h"
 
 class Panel : public Window {
-  public:
-  static void Add_Panel_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(Window);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);

@@ -1,4 +1,3 @@
-#define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 #include <rendering.h>
@@ -13,6 +12,10 @@
 #include <wx/wx.h>
 #include <wx/evtloop.h>
 #include <wx/sysopt.h>
+
+#include <diesel.h>
+
+#include <map>
 
 #include <iostream>
 #include <sstream>
@@ -58,10 +61,6 @@ extern unsigned __int64 FindPattern(const char* module, const char* funcname, co
 
 extern void FindPatternMultiple(const char* module, const char* funcname, const char* pattern, const char* mask, std::vector<unsigned __int64>& matches, bool stop_after_first);
 
-int EWS_DieselApp_ProcessEvents(lua_State *L) {
-  return 0;
-}
-
 int EWS_Log(lua_State* L) {
   if (lua_type(L, 1) == LUA_TSTRING)
     std::cout << lua_tostring(L, 1) << std::endl;
@@ -93,7 +92,6 @@ __int64 __fastcall h_dsl__LuaInterpreter_constructor(__int64 this_, int thread, 
     lua_State* state = ((dsl::LuaInterpreter*)this_)->L;
     std::cout << "lua state created" << std::endl;
     EWS::add_members(state);
-    lua_register(state, "EWS_DieselApp_ProcessEvents", EWS_DieselApp_ProcessEvents);
     lua_register(state, "EWS_Log", EWS_Log);
 
     typedef void(__cdecl* setup_lrdb_on_state_t)(lua_State* L); // setup_lrdb_on_state
@@ -109,34 +107,6 @@ __int64 __fastcall h_dsl__LuaInterpreter_constructor(__int64 this_, int thread, 
   return ret;
 }
 
-class RAID_CXX14_string {
-public:
-  union {
-    char* _Ptr;
-    char _Buf[16];
-  };
-  size_t size;
-  size_t reserved_size;
-
-public:
-  std::string get_string() const {
-    if (size < 16) {
-      return std::string(this->_Buf);
-    }
-    else {
-      return std::string(this->_Ptr);
-    }
-  }
-  const char* get_cstring() const
-  {
-    if (size < 16) {
-      return this->_Buf;
-    }
-    else {
-      return this->_Ptr;
-    }
-  }
-};
 
 typedef __int64(__fastcall* dsl__LuaRuntimeError__LuaRuntimeError_t)(dsl::LuaRuntimeError* this_, lua_State* L, RAID_CXX14_string* what);
 dsl__LuaRuntimeError__LuaRuntimeError_t o_dsl__LuaRuntimeError__LuaRuntimeError;
@@ -152,14 +122,6 @@ __int64 __fastcall h_dsl__LuaRuntimeError__LuaRuntimeError(dsl::LuaRuntimeError*
   return ret;
 }
 #pragma endregion
-
-namespace dsl {
-  class ThreadManager__Thread {
-  public:
-    char pad[8];
-    RAID_CXX14_string name;
-  };
-}
 
 std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 
@@ -247,7 +209,7 @@ void setup_EWS(HINSTANCE instance)
 
   load_hashlist(); // TODO: add custom idstring string server. maybe?
 
-  
+
 
   //std::cout << attempt_to_find_source_idstring_from_hashlist(0x99e60fa5d3f23c2d) << std::endl;
   //std::cout << attempt_to_find_source_idstring_from_hashlist(_byteswap_uint64(0x99e60fa5d3f23c2d)) << std::endl;
@@ -278,6 +240,8 @@ MH_EnableHook((LPVOID)dsl__ThreadManager__ThreadManagerThreadProc);
 MH_CreateHook((LPVOID)Application__update, &Application__update_h, (LPVOID*)&Application__update_o);
 MH_EnableHook((LPVOID)Application__update);
 
+dsl::init_push_lua_functions(FindPattern);
+
 setup_rendering_hooks();
 setup_input_hooks();
 
@@ -287,53 +251,38 @@ LoadLibrary("DieselLuaDebugger.dll");
 class EWSRegisteredEventData;
 std::vector<EWSRegisteredEventData*> registered_events;
 
-namespace dsl {
-  class DataStore {
-  public:
-    virtual ~DataStore();
-  };
-  template<typename T>
-  class SP {
-    T* _p;
-    unsigned int _c;
-  };
-  class Archive {
-  public:
-    RAID_CXX14_string _name;
-
-    __int64 _pos;
-    //__int64 _start;
-    __int64 _size;
-
-    __int64 unk1;
-
-    bool _sizable;
-    bool _closed;
-
-    __int64 unk2;
-    _RTL_CRITICAL_SECTION _cs;
-
-    dsl::SP<DataStore> _store;
-  };
-  class Transport {
-  public:
-    virtual ~Transport();
-    virtual dsl::Archive* open(dsl::Archive* result, unsigned int db_key);
-  };
-}
-struct ResourceID {
-  dsl::idstring type;
-  dsl::idstring name;
-};
 dsl::idstring last_type;
 dsl::idstring last_name;
 
+dsl::DB* db;
+std::map<unsigned int, dsl::DB::DBExtKey> reverseDBLookupMap;
+__int64(__fastcall* o_dsl__DB__load)(dsl::DB* thiz);
+__int64 __fastcall h_dsl__DB__load(dsl::DB* thiz)
+{
+  __int64 ret = o_dsl__DB__load(thiz);
+  db = thiz;
+
+  for (auto& entry : thiz->_data->_lookup) {
+    reverseDBLookupMap.insert(std::make_pair(entry.second, entry.first));
+  }
+  
+
+  return ret;
+}
+
+const dsl::DB::DBExtKey& FromDBKey(unsigned int dbKey)
+{
+  return reverseDBLookupMap[dbKey];
+}
+
 __int64(__fastcall* o_MultiFileTransport__open)(__int64* thiz, dsl::Archive* result, unsigned int key);
 __int64 __fastcall h_MultiFileTransport__open(__int64* thiz, dsl::Archive* result, unsigned int key) {
-  auto ret = o_MultiFileTransport__open(thiz, result, key);
 
-  PWSTR desc;
-  GetThreadDescription(GetCurrentThread(), &desc);
+  auto& resource = FromDBKey(key);
+
+  (void)resource;
+
+  auto ret = o_MultiFileTransport__open(thiz, result, key);
 
   /*std::cout << "Attempting to open: all" << (key % 512) << "/" << key << "\n";// << " file: " << attempt_to_find_source_idstring_from_hashlist(last_name, false) << "." << attempt_to_find_source_idstring_from_hashlist(last_type, false) << "\n";
   if (desc)
@@ -347,14 +296,14 @@ __int64 __fastcall h_MultiFileTransport__open(__int64* thiz, dsl::Archive* resul
 HANDLE(__stdcall* o_CreateFileA)(LPCSTR lpFileName, DWORD desiredAccess, DWORD shareMode, LPSECURITY_ATTRIBUTES securityAttributes, DWORD creationDisposition, DWORD flagsAndAttributes, HANDLE templateFile);
 HANDLE(__stdcall* o_CreateFileW)(LPCWSTR lpFileName, DWORD desiredAccess, DWORD shareMode, LPSECURITY_ATTRIBUTES securityAttributes, DWORD creationDisposition, DWORD flagsAndAttributes, HANDLE templateFile);
 HANDLE __stdcall h_CreateFileA(LPCSTR lpFileName, DWORD desiredAccess, DWORD shareMode, LPSECURITY_ATTRIBUTES securityAttributes, DWORD creationDisposition, DWORD flagsAndAttributes, HANDLE templateFile) {
-  if (!std::string(lpFileName).starts_with("\\"))
-    std::cout << "CreateFileA: " << lpFileName << "\n";
+  //if (!std::string(lpFileName).starts_with("\\"))
+  //  std::cout << "CreateFileA: " << lpFileName << "\n";
   auto ret = o_CreateFileA(lpFileName, desiredAccess, shareMode, securityAttributes, creationDisposition, flagsAndAttributes, templateFile);
   return ret;
 }
 HANDLE __stdcall h_CreateFileW(LPCWSTR lpFileName, DWORD desiredAccess, DWORD shareMode, LPSECURITY_ATTRIBUTES securityAttributes, DWORD creationDisposition, DWORD flagsAndAttributes, HANDLE templateFile) {
   auto ret = o_CreateFileW(lpFileName, desiredAccess, shareMode, securityAttributes, creationDisposition, flagsAndAttributes, templateFile);
-  if (!std::wstring(lpFileName).starts_with(L"\\")) {
+  if (!std::wstring(lpFileName).starts_with(L"\\") && false) {
     if (ret == INVALID_HANDLE_VALUE)
       std::wcout << L"CreateFileW (INVALID_HANDLE_VALUE): " << lpFileName << L"\n";
     /*else
@@ -377,6 +326,8 @@ void* __fastcall h_PackageManager__resource(__int64* thiz, ResourceID* r) {
 
 __int64 (__fastcall* o_Package__preload)(__int64 thiz, ResourceID* a2, char a3, char a4);
 __int64 __fastcall h_Package__preload(__int64 thiz, ResourceID* a2, char a3, char a4) {
+  if (a2->name == dsl::idstring("core/units/run_sequence_dummy/run_sequence_dummy"))
+    return 0;
 
   auto ret = o_Package__preload(thiz, a2, a3, a4);
   if(!ret)
@@ -411,6 +362,7 @@ void MultiFileTransportTesting() {
   // u24.4
   auto MultiFileTransport__open = FindPattern("raid_win64_release.exe", "MultiFileTransport::open", "\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x48\x89\x54\x24\x00\x57\x48\x81\xEC", "xxxx?xxxx?xxxx?xxxx?xxxx");
 
+  auto dsl__DB__load = FindPattern("raid_win64_release.exe", "dsl::DB::load", "\x48\x89\x5C\x24\x00\x55\x56\x57\x41\x56\x41\x57\x48\x8D\x6C\x24\x00\x48\x81\xEC\x00\x00\x00\x00\x4C\x8B\xF1", "xxxx?xxxxxxxxxxx?xxx????xxx");
   auto dsl__DB__try_open = FindPattern("raid_win64_release.exe", "dsl::DB::try_open", "\x48\x89\x5C\x24\x00\x48\x89\x6C\x24\x00\x48\x89\x74\x24\x00\x48\x89\x4C\x24\x00\x57\x41\x56\x41\x57\x48\x83\xEC\x00\x49\x8B\xF9", "xxxx?xxxx?xxxx?xxxx?xxxxxxxx?xxx");
   //auto dsl__DB__try_open_LanguageResolver = (unsigned long long)((uint64_t)GetModuleHandle("raid_win64_release.exe") + 0x1636A0);//*(unsigned long long*)FindPattern("raid_win64_release.exe", "dsl::DB::try_open_LanguageResolver_xref", "\xE8\x00\x00\x00\x00\xC7\x44\x24\x00\x00\x00\x00\x00\x48\x83\x7F", "x????xxx?????xxx");
   //auto dsl__DB__try_open_unk1 = (unsigned long long)((uint64_t)GetModuleHandle("raid_win64_release.exe") + 0x466E0);
@@ -431,6 +383,9 @@ MH_CreateHook((LPVOID)db_try_open[variant], &h_dsl__DB__try_open_##variant, (LPV
 MH_EnableHook((LPVOID)db_try_open[variant]);
 
   HOOK_DB_TRY_OPEN(0);
+
+  MH_CreateHook((LPVOID)dsl__DB__load, &h_dsl__DB__load, (LPVOID*)&o_dsl__DB__load);
+  MH_EnableHook((LPVOID)dsl__DB__load);
 
   MH_CreateHook((LPVOID)MultiFileTransport__open, &h_MultiFileTransport__open, reinterpret_cast<LPVOID*>(&o_MultiFileTransport__open));
   MH_EnableHook((LPVOID)MultiFileTransport__open);
@@ -459,8 +414,8 @@ BOOL __stdcall DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved) {
 
   
   if(reason == DLL_PROCESS_ATTACH) {
-    AllocConsole();
-    freopen("CONOUT$", "w", stdout);
+    if (AttachConsole(ATTACH_PARENT_PROCESS) || AllocConsole())
+      freopen("CONOUT$", "w", stdout);
     MINHOOK_ERROR_CHECKING("Failed to initialise MinHook:", MH_Initialize());
 
     MultiFileTransportTesting();

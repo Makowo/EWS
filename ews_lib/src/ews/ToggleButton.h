@@ -6,8 +6,9 @@
 #include <wx/tglbtn.h>
 
 class ToggleButton : public AnyButton {
+  COMPONENT_CHILD_CLASS(ToggleButton);
 public:
-  static void Add_ToggleButton_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

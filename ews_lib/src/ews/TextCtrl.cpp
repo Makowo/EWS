@@ -2,19 +2,20 @@
 
 #include "ews_utils.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_TextCtrl_ShowPosition", TextCtrl::Lua_ShowPosition},
-
-
-  TEXTENTRY_METHODS_LIST(TextCtrl)
-};
-
-ADD_FUNCS_AUTOFILL(TextCtrl::Add_TextCtrl_Funcs)
+void TextCtrl::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+  TEXTENTRY_METHODS_LIST(TextCtrl);
+  REGISTER_LUA_CLASS_FUNCTION(TextCtrl::Lua_ShowPosition, "show_position")
+  REGISTER_LUA_CLASS_FUNCTION(TextCtrl::Lua_SetValue, "change_value")
+}
 
 int TextCtrl::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto text = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto text = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
+
+  style = (style ? style : "");
 
   auto textctrl = create_new_ews_object<TextCtrl>(L);
 

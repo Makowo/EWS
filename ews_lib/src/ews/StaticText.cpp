@@ -1,17 +1,17 @@
 #include "StaticText.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_StaticText_SetValue", StaticText::Lua_SetValue},
-  {"EWS_StaticText_SetLabel", StaticText::Lua_SetLabel}
-};
-
-ADD_FUNCS_AUTOFILL(StaticText::Add_StaticText_Funcs)
+void StaticText::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(StaticText::Lua_SetValue, "set_value");
+  REGISTER_LUA_CLASS_FUNCTION(StaticText::Lua_SetLabel, "set_label");
+}
 
 int StaticText::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  std::string text = lua_tostring(L, 2);
-  int unknown = lua_tonumber(L, 3);
-  std::string style = lua_tostring(L, 4);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  std::string text = lua_tostring(L, 3);
+  int unknown = lua_tonumber(L, 4);
+  std::string style = lua_tostring(L, 5);
 
   StaticText* statictext = create_new_ews_object<StaticText>(L);
 

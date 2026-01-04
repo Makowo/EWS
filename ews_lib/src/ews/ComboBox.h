@@ -6,8 +6,9 @@
 #include "./TextEntry.h"
 
 class ComboBox : public Control {
+  COMPONENT_CHILD_CLASS("ComboBox");
 public:
-  static void Add_ComboBox_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

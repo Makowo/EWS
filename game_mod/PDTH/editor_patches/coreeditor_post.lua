@@ -1,0 +1,1 @@
+CoreEditorUtils.parse_layer_types = function() end

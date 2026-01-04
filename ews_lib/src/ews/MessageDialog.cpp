@@ -2,22 +2,17 @@
 
 #include <iostream>
 
-static const std::vector<luaL_Reg> methods = {
-};
 
-
-void MessageDialog::Add_MessageDialog_Funcs(lua_State* L) {
-  for (int i = 0; i < methods.size(); i++)
-  {
-    lua_register(L, methods[i].name, methods[i].func);
-  }
+void MessageDialog::AddLuaFunctions(lua_State* L)
+{
+  Dialog::AddLuaFunctions(L);
 }
 
 int MessageDialog::Lua_Create(lua_State* L) {
-  Window *parent = get_ews_object_from_top<Window>(L, 1);
-  auto message = lua_tostring(L, 2);
-  auto caption = lua_tostring(L, 3);
-  auto style = lua_tostring(L, 4);
+  Window *parent = get_ews_object_from_top<Window>(L, 2);
+  auto message = lua_tostring(L, 3);
+  auto caption = lua_tostring(L, 4);
+  auto style = lua_tostring(L, 5);
 
   auto dialog = create_new_ews_object<MessageDialog>(L);
 

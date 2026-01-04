@@ -4,8 +4,9 @@
 #include "Dialog.h"
 
 class FileDialog : public Dialog {
+  COMPONENT_CHILD_CLASS(FileDialog);
 public:
-  static void Add_FileDialog_Funcs(lua_State* L);
+  static void AddLuaFunctions(lua_State* L);
 
 public:
   static int Lua_Create(lua_State* L);

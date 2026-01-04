@@ -6,15 +6,15 @@
 
 #include <dinput.h>
 
-static const std::vector<luaL_Reg> methods = {
-};
-
-ADD_FUNCS_AUTOFILL(AppWindow::Add_AppWindow_Funcs)
+void AppWindow::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
+}
 
 int AppWindow::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  Vector3* size = get_vec3_from_arg(L, 2);
-  std::string style = lua_tostring(L, 3);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  Vector3* size = get_vec3_from_arg(L, 3);
+  std::string style = lua_tostring(L, 4);
 
   AppWindow* appwindow = create_new_ews_object<AppWindow>(L);
 
@@ -98,29 +98,35 @@ void wxAppWindow::Keyboard_OnChar(wxKeyEvent& evt) {
 }
 
 void wxAppWindow::Mouse_Move(wxMouseEvent& evt) {
-  get_dsl_window_from_hwnd(this->raid_window)->_mouse_x = evt.GetX();
-  get_dsl_window_from_hwnd(this->raid_window)->_mouse_y = evt.GetY();
+  if (get_dsl_window_from_hwnd(this->raid_window)) {
+    get_dsl_window_from_hwnd(this->raid_window)->_mouse_x = evt.GetX();
+    get_dsl_window_from_hwnd(this->raid_window)->_mouse_y = evt.GetY();
+  }
 }
 
-void wxAppWindow::Mouse_LeftButtonDown(wxMouseEvent& evt) { get_dsl_window_from_hwnd(this->raid_window)->_mouse_l_button = true; evt.Skip(); }
-void wxAppWindow::Mouse_LeftButtonUp(wxMouseEvent& evt) { get_dsl_window_from_hwnd(this->raid_window)->_mouse_l_button = false; }
-void wxAppWindow::Mouse_RightButtonDown(wxMouseEvent& evt) { get_dsl_window_from_hwnd(this->raid_window)->_mouse_r_button = true; }
-void wxAppWindow::Mouse_RightButtonUp(wxMouseEvent& evt) { get_dsl_window_from_hwnd(this->raid_window)->_mouse_r_button = false; }
+void wxAppWindow::Mouse_LeftButtonDown(wxMouseEvent& evt) { if(get_dsl_window_from_hwnd(this->raid_window)) get_dsl_window_from_hwnd(this->raid_window)->_mouse_l_button = true; evt.Skip(); }
+void wxAppWindow::Mouse_LeftButtonUp(wxMouseEvent& evt) { if(get_dsl_window_from_hwnd(this->raid_window)) get_dsl_window_from_hwnd(this->raid_window)->_mouse_l_button = false; }
+void wxAppWindow::Mouse_RightButtonDown(wxMouseEvent& evt) { if(get_dsl_window_from_hwnd(this->raid_window)) get_dsl_window_from_hwnd(this->raid_window)->_mouse_r_button = true; }
+void wxAppWindow::Mouse_RightButtonUp(wxMouseEvent& evt) { if(get_dsl_window_from_hwnd(this->raid_window)) get_dsl_window_from_hwnd(this->raid_window)->_mouse_r_button = false; }
 
 void wxAppWindow::Mouse_EnterWindow(wxMouseEvent& evt) {
-  get_dsl_window_from_hwnd(this->raid_window)->_mouse_in_window = true;
+  if(get_dsl_window_from_hwnd(this->raid_window))
+    get_dsl_window_from_hwnd(this->raid_window)->_mouse_in_window = true;
   //get_dsl_window_from_hwnd(this->raid_window)->_activate_state = true;
 }
 
 void wxAppWindow::Mouse_LeaveWindow(wxMouseEvent& evt) {
-  get_dsl_window_from_hwnd(this->raid_window)->_mouse_in_window = false;
+  if(get_dsl_window_from_hwnd(this->raid_window))
+    get_dsl_window_from_hwnd(this->raid_window)->_mouse_in_window = false;
   //get_dsl_window_from_hwnd(this->raid_window)->_activate_state = false;
 }
 
 void wxAppWindow::Event_Activate(wxActivateEvent& evt) {
   std::cout << "Activate" << std::endl;
-  get_dsl_window_from_hwnd(this->raid_window)->_activate_state = evt.GetActive();
-  get_dsl_window_from_hwnd(this->raid_window)->_activation_altered = true;
+  if (get_dsl_window_from_hwnd(this->raid_window)) {
+    get_dsl_window_from_hwnd(this->raid_window)->_activate_state = evt.GetActive();
+    get_dsl_window_from_hwnd(this->raid_window)->_activation_altered = true;
+  }
 }
 
 void wxAppWindow::set_real_raid_window(HWND raid) {

@@ -8,10 +8,11 @@
 class Window;
 
 class StatusBar : public Control {
-  public:
-  static void Add_StatusBar_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(StatusBar);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
-  public:
+public:
   static int Lua_Create(lua_State* L);
   
 public:

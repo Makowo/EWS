@@ -2,23 +2,23 @@
 
 #include "Panel.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_Notebook_Add_Page", Notebook::Lua_Add_Page},
+void Notebook::AddLuaFunctions(lua_State* L)
+{
+  Window::AddLuaFunctions(L);
 
-  {"EWS_Notebook_GetPageCount", Notebook::Lua_GetPageCount},
-  {"EWS_Notebook_SetPageText", Notebook::Lua_SetPageText},
-  {"EWS_Notebook_GetPageText", Notebook::Lua_GetPageText},
-  {"EWS_Notebook_Fit", Notebook::Lua_Fit},
-  {"EWS_Notebook_SetPage", Notebook::Lua_SetPage},
-  {"EWS_Notebook_GetCurrentPage", Notebook::Lua_GetCurrentPage},
-};
-
-ADD_FUNCS_AUTOFILL(Notebook::Add_Notebook_Funcs)
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_Add_Page, "add_page");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetPageCount, "get_page_count");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_SetPageText, "set_page_text");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetPageText, "get_page_text");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_Fit, "fit");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_SetPage, "set_page");
+  REGISTER_LUA_CLASS_FUNCTION(Notebook::Lua_GetCurrentPage, "get_current_page");
+}
 
 int Notebook::Lua_Create(lua_State* L) {
-  Window* parent = get_ews_object_from_top<Window>(L, 1);
-  std::string name = lua_tostring(L, 2);
-  std::string style = lua_tostring(L, 3);
+  Window* parent = get_ews_object_from_top<Window>(L, 2);
+  std::string name = lua_tostring(L, 3);
+  std::string style = lua_tostring(L, 4);
 
   Notebook* notebook = create_new_ews_object<Notebook>(L);
 

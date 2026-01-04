@@ -1,20 +1,20 @@
 
 #include "FileDialog.h"
 
-static const std::vector<luaL_Reg> methods = {
-  {"EWS_FileDialog_GetPath", FileDialog::Lua_GetPath},
-  {"EWS_FileDialog_GetDirectory", FileDialog::Lua_GetDirectory},
-};
-
-ADD_FUNCS_AUTOFILL(FileDialog::Add_FileDialog_Funcs)
+void FileDialog::AddLuaFunctions(lua_State* L)
+{
+  Dialog::AddLuaFunctions(L);
+  REGISTER_LUA_CLASS_FUNCTION(FileDialog::Lua_GetPath, "get_path");
+  REGISTER_LUA_CLASS_FUNCTION(FileDialog::Lua_GetDirectory, "get_directory");
+}
 
 int FileDialog::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<FileDialog>(L, 1);
-  auto title = lua_tostring(L, 2);
-  auto start_path = lua_tostring(L, 3);
-  auto default_file = lua_tostring(L, 4);
-  auto type_selection_restrictions = lua_tostring(L, 5);
-  auto style = lua_tostring(L, 6);
+  auto parent = get_ews_object_from_top<FileDialog>(L, 2);
+  auto title = lua_tostring(L, 3);
+  auto start_path = lua_tostring(L, 4);
+  auto default_file = lua_tostring(L, 5);
+  auto type_selection_restrictions = lua_tostring(L, 6);
+  auto style = lua_tostring(L, 7);
 
   auto filedialog = create_new_ews_object<FileDialog>(L);
 

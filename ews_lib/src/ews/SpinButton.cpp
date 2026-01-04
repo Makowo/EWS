@@ -3,15 +3,16 @@
 
 #include <wx/spinbutt.h>
 
-static const std::vector<luaL_Reg> methods = {
-};
 
-ADD_FUNCS_AUTOFILL(SpinButton::Add_SpinButton_Funcs)
+void SpinButton::AddLuaFunctions(lua_State* L)
+{
+  Control::AddLuaFunctions(L);
+}
 
 int SpinButton::Lua_Create(lua_State* L) {
-  auto parent = get_ews_object_from_top<Window>(L, 1);
-  auto id = lua_tostring(L, 2);
-  auto style = lua_tostring(L, 3);
+  auto parent = get_ews_object_from_top<Window>(L, 2);
+  auto id = lua_tostring(L, 3);
+  auto style = lua_tostring(L, 4);
 
   auto spinbutton = create_new_ews_object<SpinButton>(L);
 

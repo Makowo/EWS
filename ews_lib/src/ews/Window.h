@@ -7,10 +7,11 @@
 #include <iostream>
 
 class Window : public Component {
-  public:
-  static void Add_Window_Funcs(lua_State* L);
-  
-  public:
+  COMPONENT_CHILD_CLASS(Window);
+public:
+  static void AddLuaFunctions(lua_State* L);
+
+public:
   static int Lua_Set_Sizer(lua_State* L);
   static int Lua_Set_Visible(lua_State* L);
 

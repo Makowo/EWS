@@ -7,8 +7,9 @@
 #include "Sizer.h"
 
 class BoxSizer : public Sizer {
-  public:
-  static void Add_BoxSizer_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(BoxSizer);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
   public:
   static int Lua_Create(lua_State* L);

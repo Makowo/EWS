@@ -18,7 +18,7 @@ namespace dsl {
     unsigned int _style;
     unsigned int _style_ex;
 
-    char pad1[58]; // _input_buffer (std::string) and _control_key_buffer (std::vector<dsl::idstring>)
+    char pad1[44]; // _input_buffer (std::string) and _control_key_buffer (std::vector<dsl::idstring>)
 
     float _mouse_x;
     float _mouse_y;
@@ -34,14 +34,9 @@ namespace dsl {
     bool _activation_altered;
     bool _activate_state;
   };
-};
-
-class RenderInterface {
-public:
-  char padding[112];
-  dsl::Win32Window* window;
-};
+}
 
 class AppWindow;
 void set_appwindow(AppWindow* new_appwindow);
 void setup_rendering_hooks();
+

@@ -10,12 +10,16 @@
 int wxsizer_flags_to_int(std::string flags);
 
 class Sizer : public Component {
-  public:
-  static void Add_Sizer_Funcs(lua_State* L);
+  COMPONENT_CHILD_CLASS(Sizer);
+public:
+  static void AddLuaFunctions(lua_State* L);
 
-  public:
+public:
+    static int Lua_Add(lua_State* L);
+
     static int Lua_Add_WindowObj(lua_State *L);
     static int Lua_Add_SizerObj(lua_State *L);
 
-    static int Lua_AddStrechSpacer(lua_State* L);
+    static int Lua_AddSpacer(lua_State* L);
+    static int Lua_AddStretchSpacer(lua_State* L);
 };
